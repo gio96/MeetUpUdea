@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
+    dexOptions{
+        preDexLibraries true
+        maxProcessCount 8
+    }
     compileSdkVersion 27
     buildToolsVersion "28.0.2"
     defaultConfig {
