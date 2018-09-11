@@ -19,11 +19,20 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity{
 
@@ -33,6 +42,11 @@ public class LoginActivity extends AppCompatActivity{
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+
+    private List<User> list_users = new ArrayList<>();
 
 
 
@@ -87,6 +101,10 @@ public class LoginActivity extends AppCompatActivity{
                 signIn();
             }
         });
+
+        //firebase
+        initFirebase();
+        addUserFirebaseListener();
     }
 
     @Override
@@ -95,6 +113,7 @@ public class LoginActivity extends AppCompatActivity{
 
         mAuth.addAuthStateListener(mAuthListener);
     }
+
 
     private void signIn() {
 
@@ -137,9 +156,10 @@ public class LoginActivity extends AppCompatActivity{
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("", "signInWithCredential:success");
 
-                            /*
+                            //CAMBIEEE
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);*/
+                            //startMainActivity(user);
+                            //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("", "signInWithCredential:failure", task.getException());
@@ -156,5 +176,32 @@ public class LoginActivity extends AppCompatActivity{
                         // ...
                     }
                 });
+    }
+
+    private void addUserFirebaseListener(){
+        mDatabaseReference.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(list_users.size() > 0)
+                    list_users.clear();
+
+                for(DataSnapshot postSnapshot:dataSnapshot.getChildren()){
+                    User user = postSnapshot.getValue(User.class);
+                    list_users.add(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void initFirebase()
+    {
+        FirebaseApp.initializeApp(this.getApplicationContext());
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
     }
 }
