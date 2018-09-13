@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    dexOptions{
+    dexOptions {
         preDexLibraries true
         maxProcessCount 8
     }
@@ -30,6 +30,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.0'
     implementation 'com.google.firebase:firebase-auth:16.0.3'
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
+    implementation 'com.android.support:support-v4:27.1.1'
     testImplementation 'junit:junit:4.12'
 
     implementation 'com.android.support:cardview-v7:27.1.1'
@@ -37,7 +38,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.1'
     implementation 'com.firebaseui:firebase-ui-database:0.4.0'
     implementation 'com.squareup.picasso:picasso:2.5.0'
-    
+
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

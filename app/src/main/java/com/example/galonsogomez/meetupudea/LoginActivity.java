@@ -53,12 +53,12 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        configureGoogleSignIn();
+        googleSignIn();
 
     }
 
 
-    private void configureGoogleSignIn(){
+    private void googleSignIn(){
 
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
         loginButton = (SignInButton)findViewById(R.id.btn_Login);
@@ -188,7 +188,7 @@ public class LoginActivity extends AppCompatActivity{
         User user = new  User(F_user.getUid());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
-        mDatabaseReference.child("users").child(user.getUid()).setValue(user);
+        mDatabaseReference.child("users").child(user.getUserUID()).setValue(user);
     }
 
 }

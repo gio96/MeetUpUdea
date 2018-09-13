@@ -7,42 +7,61 @@ import java.util.Date;
 
 public class Group {
 
-    //private String idGroup;
-    private String Title;
-    private String Picture;
-    /*private String description;
-    private Date date;
-    private String location;
-    private Integer numberAssistans;
-    private Date finishDate;*/
-
-    public Group(String title, String picture) {
-        this.Title = title;
-        this.Picture = picture;
-    }
-
-    public Group(String title) {
-        this.Title = title;
-    }
+    private String groupUID;
+    private String userUID;
+    private String title;
+    private String picture;
+    private String description;
 
     public Group() {
 
     }
 
-    public String getPicture() {
-        return Picture;
+    public Group(String groupUID, String userUID, String title, String picture, String description) {
+        this.groupUID = groupUID;
+        this.userUID = userUID;
+        this.title = title;
+        this.picture = picture;
+        this.description = description;
     }
 
-    public void setPicture(String picture) {
-        this.Picture = picture;
+    public String getUserUID() {
+        return userUID;
+    }
+
+    public void setUserUID(String userUID) {
+        this.userUID = userUID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getGroupUID() {
+        return groupUID;
+    }
+
+    public void setGroupUID(String groupUID) {
+        this.groupUID = groupUID;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        this.Title = title;
+        this.title = title;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 }

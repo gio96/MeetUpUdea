@@ -2,17 +2,17 @@ package com.example.galonsogomez.meetupudea;
 
 public class User {
 
-    private String uid;
+    private String userUID;
 
-    public User(String uid) {
-        this.uid = uid;
+    public User(String userUID) {
+        this.userUID = userUID;
     }
 
-    public String getUid() {
-        return uid;
+    public String getUserUID() {
+        return userUID;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setUserUID(String userUID) {
+        this.userUID = userUID;
     }
 }
