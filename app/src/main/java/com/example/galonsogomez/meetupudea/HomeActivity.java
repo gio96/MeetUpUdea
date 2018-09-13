@@ -25,10 +25,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
     private Button logOutButton;
-    private List<Group> lstGroup;
-
     private RecyclerView myrv;
-
     private DatabaseReference mreference;
 
     @Override
@@ -36,19 +33,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-        lstGroup = new ArrayList<>();
-        /*
-        lstGroup.add(new Group("Meetup",R.drawable.meetup));
-        lstGroup.add(new Group("Prueba2",R.drawable.prueba2));
-        lstGroup.add(new Group("Prueba3",R.drawable.prueba3));
-        lstGroup.add(new Group("Prueba4",R.drawable.prueba4));
-        lstGroup.add(new Group("Prueba5",R.drawable.prueba5));
-        lstGroup.add(new Group("Prueba6",R.drawable.prueba6));
-        lstGroup.add(new Group("Prueba3",R.drawable.prueba3));
-        lstGroup.add(new Group("Prueba4",R.drawable.prueba4));
-        lstGroup.add(new Group("Prueba5",R.drawable.prueba5));
-        lstGroup.add(new Group("Prueba6",R.drawable.prueba6));*/
 
         //call the Database groups
 
@@ -60,9 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         myrv = (RecyclerView) findViewById(R.id.recycler_View);
         myrv.setHasFixedSize(true);
 
-        //RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this,lstGroup);
         myrv.setLayoutManager(new GridLayoutManager(this,2));
-        //myrv.setAdapter(myAdapter);
     }
 
     @Override
@@ -112,8 +94,6 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
-
-
 
     /* public void onClick(View v){
 

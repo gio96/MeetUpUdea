@@ -9,7 +9,6 @@ public class Group {
 
     //private String idGroup;
     private String Title;
-    private int Thumbnail;
     private String Picture;
     /*private String description;
     private Date date;
@@ -46,11 +45,4 @@ public class Group {
         this.Title = title;
     }
 
-    public int getThumbnail() {
-        return Thumbnail;
-    }
-
-    public void setThumbnail(int thumbnail) {
-        this.Thumbnail = thumbnail;
-    }
 }

@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity{
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
 
-    private List<User> list_users = new ArrayList<>();
 
 
 
@@ -54,15 +53,23 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        configureGoogleSignIn();
+
+    }
+
+
+    private void configureGoogleSignIn(){
+
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
         loginButton = (SignInButton)findViewById(R.id.btn_Login);
         mAuth = FirebaseAuth.getInstance();
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
 
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                //FirebaseUser user = firebaseAuth.getCurrentUser();
                 //Log.d("Email",user.getEmail());
 
                 if(firebaseAuth.getCurrentUser()!= null){
@@ -101,17 +108,15 @@ public class LoginActivity extends AppCompatActivity{
                 signIn();
             }
         });
-
-        //firebase
-        initFirebase();
-        addUserFirebaseListener();
     }
+
 
     @Override
     protected void onStart() {
         super.onStart();
-
         mAuth.addAuthStateListener(mAuthListener);
+
+
     }
 
 
@@ -156,10 +161,10 @@ public class LoginActivity extends AppCompatActivity{
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("", "signInWithCredential:success");
 
-                            //CAMBIEEE
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //startMainActivity(user);
-                            //updateUI(user);
+                            //get current user
+                            FirebaseUser F_user = mAuth.getCurrentUser();
+                            //add UID FirebaseDatabase
+                            addUserUID(F_user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("", "signInWithCredential:failure", task.getException());
@@ -178,30 +183,12 @@ public class LoginActivity extends AppCompatActivity{
                 });
     }
 
-    private void addUserFirebaseListener(){
-        mDatabaseReference.child("users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(list_users.size() > 0)
-                    list_users.clear();
-
-                for(DataSnapshot postSnapshot:dataSnapshot.getChildren()){
-                    User user = postSnapshot.getValue(User.class);
-                    list_users.add(user);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void initFirebase()
+    private void addUserUID(FirebaseUser F_user)
     {
-        FirebaseApp.initializeApp(this.getApplicationContext());
+        User user = new  User(F_user.getUid());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
+        mDatabaseReference.child("users").child(user.getUid()).setValue(user);
     }
+
 }
