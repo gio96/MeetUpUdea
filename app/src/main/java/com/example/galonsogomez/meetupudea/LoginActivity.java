@@ -188,7 +188,7 @@ public class LoginActivity extends AppCompatActivity{
         User user = new  User(F_user.getUid());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
-        mDatabaseReference.child("users").child(user.getUserUID()).setValue(user);
+        mDatabaseReference.child("users").setValue(user);
     }
 
 }
