@@ -77,6 +77,7 @@ public class HomeActivity extends AppCompatActivity {
                         bundle.putString("UID",model.getGroupUID());
                         bundle.putString("title",model.getTitle());
                         bundle.putString("picture",model.getPicture());
+                        bundle.putString("description",model.getDescription());
 
                         //Log.d("bulde", bundle.toString());
                         //Log.d("idcard",model.getGroupUID());

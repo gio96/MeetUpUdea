@@ -17,7 +17,7 @@ public class ShowGroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_group);
 
-        //datos enviados desde home
+        //Recibo los datos enviados desde home
         Bundle b = getIntent().getExtras();
 
         /*String id = b.getString("UID");
@@ -26,9 +26,13 @@ public class ShowGroupActivity extends AppCompatActivity {
         Log.d("Valores", "bundle: " + id + title + picture);*/
 
         ShowGroupFragment showGroupFragment = new ShowGroupFragment();
-        //Se le envian los datos al fragment
-        showGroupFragment.setArguments(b);
+        ShowGroupInforFragment showGroupInforFragment = new ShowGroupInforFragment();
 
+        //Se le envian los datos a los fragments
+        showGroupFragment.setArguments(b);
+        showGroupInforFragment.setArguments(b);
+
+        //Tabs
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 

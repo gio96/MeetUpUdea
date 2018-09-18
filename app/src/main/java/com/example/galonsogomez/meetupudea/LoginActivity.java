@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity{
                             //get current user
                             FirebaseUser F_user = mAuth.getCurrentUser();
                             //add UID FirebaseDatabase
-                            addUserUID(F_user);
+                            addUser(F_user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("", "signInWithCredential:failure", task.getException());
@@ -183,12 +183,21 @@ public class LoginActivity extends AppCompatActivity{
                 });
     }
 
-    private void addUserUID(FirebaseUser F_user)
+    private void addUser(FirebaseUser F_user)
     {
         User user = new  User(F_user.getUid());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
         mDatabaseReference.child("users").setValue(user);
+
+        /*mFirebaseDatabase = FirebaseDatabase.getInstance();
+        //ref
+        mDatabaseReference = mFirebaseDatabase.getReference();
+        DatabaseReference usersRef = mDatabaseReference.child("users");
+
+        DatabaseReference newUserRef = usersRef.push();
+        newUserRef.setValue(new User(F_user.getDisplayName()));*/
+        //String postId = newUserRef.getKey();
     }
 
 }
