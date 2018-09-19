@@ -85,7 +85,7 @@ public class ShowGroupFragment extends Fragment {
         //User user = new  User(firebaseUser.getUid());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
-        mDatabaseReference.child("users").child("userUID").child("following").setValue(uid);
+        mDatabaseReference.child("users").child(firebaseUser.getUid()).child("following").setValue(uid);
         //mDatabaseReference.child("users").setValue(user);
     }
 
