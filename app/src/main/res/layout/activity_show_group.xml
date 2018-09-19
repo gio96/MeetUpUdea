@@ -7,19 +7,46 @@
     android:orientation="vertical"
     tools:context=".ShowGroupActivity">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2">
 
-            <fragment
-            android:id="@+id/fragStatic"
-            android:name="com.example.galonsogomez.meetupudea.ShowGroupFragment"
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imageView__Group"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_show_group"/>
+            android:layout_height="match_parent"/>
 
-    </LinearLayout>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textView_Title_Group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="#8c000000"
+            android:padding="1dp"
+            android:text="Group Title"
+            android:textColor="#ffe3e3e3"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:src="@drawable/heart_outline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
