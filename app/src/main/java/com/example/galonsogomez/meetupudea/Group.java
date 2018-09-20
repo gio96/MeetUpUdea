@@ -25,6 +25,10 @@ public class Group {
         this.description = description;
     }
 
+    public Group(String groupUID) {
+        this.groupUID = groupUID;
+    }
+
     public String getUserUID() {
         return userUID;
     }
