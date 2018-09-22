@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_Meetups"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="MeetUps" />
+
+    <item
+        android:id="@+id/navigation_Events"
+        android:icon="@drawable/ic_event_note_black_24dp"
+        android:title="Events" />
+
+    <item
+        android:id="@+id/navigation_User"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="User" />
+
+</menu>

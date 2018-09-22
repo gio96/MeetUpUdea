@@ -132,11 +132,4 @@ public class HomeActivity extends AppCompatActivity {
         }
     }*/
 
-   /* public void signOut(){
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseAuth.getInstance().signOut();
-
-        Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
-        startActivity(intent);
-    }*/
 }

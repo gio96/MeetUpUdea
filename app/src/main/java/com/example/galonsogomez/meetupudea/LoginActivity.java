@@ -73,7 +73,8 @@ public class LoginActivity extends AppCompatActivity{
                 //Log.d("Email",user.getEmail());
 
                 if(firebaseAuth.getCurrentUser()!= null){
-                    Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                    //Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                    Intent intent = new Intent(LoginActivity.this,BottomNavActivity.class);
                     startActivity(intent);
                 }
             }

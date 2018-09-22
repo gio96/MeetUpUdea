@@ -44,8 +44,9 @@ public class ShowGroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_group);
 
-        //Recibo los datos enviados desde home
+        //Recibo los datos enviados desde el HomeNavFragment
         Bundle b = getIntent().getExtras();
+
 
         //Set Data
         setTitle(b.getString("title"));
