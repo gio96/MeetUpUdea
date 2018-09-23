@@ -36,17 +36,19 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity{
 
+    // Views
     SignInButton loginButton;
     ProgressBar progressBar;
-    private static final int RC_SIGN_IN = 1;
-    private GoogleApiClient mGoogleApiClient;
+
+    //Firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
 
-
+    //Google Auth
+    private static final int RC_SIGN_IN = 1;
+    private GoogleApiClient mGoogleApiClient;
 
 
     @Override
@@ -69,11 +71,7 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-                //FirebaseUser user = firebaseAuth.getCurrentUser();
-                //Log.d("Email",user.getEmail());
-
                 if(firebaseAuth.getCurrentUser()!= null){
-                    //Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                     Intent intent = new Intent(LoginActivity.this,BottomNavActivity.class);
                     startActivity(intent);
                 }
@@ -125,7 +123,6 @@ public class LoginActivity extends AppCompatActivity{
 
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent,RC_SIGN_IN);
-
     }
 
     @Override
@@ -138,14 +135,12 @@ public class LoginActivity extends AppCompatActivity{
             try {
                 // Google Sign In was successful, authenticate with Firebase
 
-                //---- posible cambio---//
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
 
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("", "Google sign in failed", e);
-                // ...
             }
         }
     }
@@ -161,11 +156,6 @@ public class LoginActivity extends AppCompatActivity{
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("", "signInWithCredential:success");
-
-                            //get current user
-                            FirebaseUser F_user = mAuth.getCurrentUser();
-                            //add UID FirebaseDatabase
-                            //addUser(F_user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("", "signInWithCredential:failure", task.getException());
@@ -175,30 +165,9 @@ public class LoginActivity extends AppCompatActivity{
 
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-
-                            //updateUI(null);
                         }
-
-                        // ...
                     }
                 });
-    }
-
-    private void addUser(FirebaseUser F_user)
-    {
-        User user = new  User(F_user.getUid());
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference();
-        mDatabaseReference.child("users").child(F_user.getUid());
-
-        /*mFirebaseDatabase = FirebaseDatabase.getInstance();
-        //ref
-        mDatabaseReference = mFirebaseDatabase.getReference();
-        DatabaseReference usersRef = mDatabaseReference.child("users");
-
-        DatabaseReference newUserRef = usersRef.push();
-        newUserRef.setValue(new User(F_user.getDisplayName()));*/
-        //String postId = newUserRef.getKey();
     }
 
 }

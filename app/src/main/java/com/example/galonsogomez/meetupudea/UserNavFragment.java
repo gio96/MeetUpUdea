@@ -21,11 +21,13 @@ import com.squareup.picasso.Picasso;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserNavFragment extends Fragment {
+public class UserNavFragment extends Fragment implements View.OnClickListener{
 
-    TextView textView;
-    Button button;
+    // Views
+    private TextView txtUserName;
+    private Button btnLogOut;
     de.hdodenhof.circleimageview.CircleImageView circleImageView;
+
     public UserNavFragment() {
         // Required empty public constructor
     }
@@ -34,15 +36,13 @@ public class UserNavFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_nav, container, false);
-        button = view.findViewById(R.id.btn_Logout);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signOut();
-            }
-        });
+        btnLogOut = view.findViewById(R.id.btn_Logout);
+        btnLogOut.setOnClickListener(this);
+
+
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         setData(view,firebaseUser);
         setPicture(view,getActivity().getApplicationContext(),firebaseUser);
@@ -51,18 +51,15 @@ public class UserNavFragment extends Fragment {
     }
 
     public void signOut(){
-
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(getActivity(),LoginActivity.class);
         startActivity(intent);
     }
 
-    public void setData(View view,FirebaseUser user)
-    {
-        textView = view.findViewById(R.id.txt_User_Frag);
-        String name=user.getDisplayName();
-        textView.setText(name);
+    public void setData(View view,FirebaseUser user){
+        txtUserName = view.findViewById(R.id.txt_User_Name);
+        String name = user.getDisplayName();
+        txtUserName.setText(name);
     }
 
     public void setPicture(View view ,Context c,FirebaseUser user) {
@@ -73,4 +70,12 @@ public class UserNavFragment extends Fragment {
                 .into(circleImageView);
     }
 
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.btn_Logout:
+                signOut();
+                break;
+        }
+    }
 }

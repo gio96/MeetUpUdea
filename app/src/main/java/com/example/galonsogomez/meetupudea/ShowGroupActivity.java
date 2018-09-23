@@ -29,23 +29,30 @@ import com.squareup.picasso.Picasso;
 
 public class ShowGroupActivity extends AppCompatActivity {
 
+    // Views
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private ImageView imageView;
-    private TextView textView;
+    private ImageView imageGroup;
+    private TextView textTitleGroup;
     private FloatingActionButton floatingActionButton;
-    String uidGroup = "";
+
+    private String uidGroup;
     boolean following = false;
 
+    // Firebase
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_group);
 
-        //Recibo los datos enviados desde el HomeNavFragment
+        //Get data from each group from HomeNavFragment
         Bundle b = getIntent().getExtras();
+        ShowGroupInforFragment showGroupInforFragment = new ShowGroupInforFragment();
+        //Send data to fragments
+        showGroupInforFragment.setArguments(b);
 
 
         //Set Data
@@ -53,21 +60,15 @@ public class ShowGroupActivity extends AppCompatActivity {
         setPicture(b.getString("picture"),getApplicationContext());
         //Set uidGroup from Bundle
         uidGroup = b.getString("UID");
-
-
-
-        //verificar si el usuario sigue a un grupo en especifico
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        createTabs();
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference().child("users").child(firebaseUser.getUid()).child("following");
+        firebaseDb();
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Group group = new Group();
-                //Log.d("follow", String.valueOf(group));
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                    group = ds.getValue(Group.class);
                    //Log.d("grupoD",group.getGroupUID());
@@ -77,14 +78,13 @@ public class ShowGroupActivity extends AppCompatActivity {
 
                        //Variable to handle the follow and unfollow
                         following = true;
-                       floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.heart));
+                       floatingActionButton.setImageDrawable(ContextCompat
+                               .getDrawable(getApplicationContext(),R.drawable.heart));
                    }else{
-                       Log.d("Nofollow", "No sigue al grupo");
+                       Log.d("unfollow", "No sigue al grupo");
                    }
 
                 }
-
-
             }
 
             @Override
@@ -95,19 +95,17 @@ public class ShowGroupActivity extends AppCompatActivity {
 
 
 
-        //following and not following
+        //following/unfollowing
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(following){
 
-                    floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.heart_outline));
-                    Snackbar.make(view, "Dejar de seguir",Snackbar.LENGTH_LONG).setAction("Action",null).show();
-
-                    //Delete groupUID of "tabla" following
-                    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                    mFirebaseDatabase = FirebaseDatabase.getInstance();
-                    mDatabaseReference = mFirebaseDatabase.getReference().child("users").child(firebaseUser.getUid()).child("following");
+                    floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext()
+                            ,R.drawable.heart_outline));
+                    Snackbar.make(view, "Dejar de seguir",Snackbar.LENGTH_LONG)
+                            .setAction("Action",null).show();
+                    firebaseDb();
                     mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -115,10 +113,8 @@ public class ShowGroupActivity extends AppCompatActivity {
                             for(DataSnapshot ds : dataSnapshot.getChildren()){
                                 groupDelete = ds.getValue(Group.class);
                                 if(uidGroup.equals(groupDelete.getGroupUID())){
-                                    Log.d("gio", "debio borrarlo");
                                     ds.getRef().removeValue();
                                 }
-
                             }
                         }
 
@@ -127,27 +123,45 @@ public class ShowGroupActivity extends AppCompatActivity {
 
                         }
                     });
-                    following=false;
+                    following =false;
 
                 }else{
-                    Snackbar.make(view, "Siguiendo",Snackbar.LENGTH_LONG).setAction("Action",null).show();
-                    floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.heart));
-
-                /*FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                Log.d("idCurrentUser",firebaseUser.getUid());*/
-
+                    Snackbar.make(view, "Siguiendo",Snackbar.LENGTH_LONG)
+                            .setAction("Action",null).show();
+                    floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
+                            R.drawable.heart));
                     setFollowing(uidGroup);
                 }
-
             }
         });
+    }
 
 
-        ShowGroupInforFragment showGroupInforFragment = new ShowGroupInforFragment();
+    public void setFollowing(String uid)
+    {
+        Group group = new Group(uid);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        //User user = new  User(firebaseUser.getUid());
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
+        mDatabaseReference.child("users").child(firebaseUser.getUid()).child("following").push().setValue(group);
+    }
 
-        //Se le envian los datos a los fragments
-        showGroupInforFragment.setArguments(b);
+    public void setTitle(String title){
 
+        textTitleGroup = (TextView) findViewById(R.id.text_Title_Group);
+        textTitleGroup.setText(title);
+    }
+
+    public void setPicture(String picture, Context c) {
+        imageGroup = (ImageView) findViewById(R.id.img_Group);
+        Picasso.with(c).load(picture)
+                .fit()
+                .centerCrop()
+                .into(imageGroup);
+    }
+
+    public void createTabs(){
         //Tabs
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -162,29 +176,11 @@ public class ShowGroupActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public void setFollowing(String uid)
-    {
-        Group group = new Group(uid);
+    public void firebaseDb(){
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        //User user = new  User(firebaseUser.getUid());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference();
-        mDatabaseReference.child("users").child(firebaseUser.getUid()).child("following").push().setValue(group);
-        //mDatabaseReference.child("users").setValue(user);
-    }
-
-    public void setTitle(String title)
-    {
-        textView = (TextView) findViewById(R.id.textView_Title_Group);
-        textView.setText(title);
-    }
-
-    public void setPicture(String picture, Context c) {
-        imageView = (ImageView) findViewById(R.id.imageView__Group);
-        Picasso.with(c).load(picture)
-                .fit()
-                .centerCrop()
-                .into(imageView);
+        mDatabaseReference = mFirebaseDatabase.getReference().child("users")
+                .child(firebaseUser.getUid()).child("following");
     }
 
 }

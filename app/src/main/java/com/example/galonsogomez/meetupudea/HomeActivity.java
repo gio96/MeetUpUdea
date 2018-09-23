@@ -29,25 +29,29 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
+    // Viewa
     private Button logOutButton;
-    private RecyclerView myrv;
+    private RecyclerView recyclerVGroups;
+
+    //Firebase
     private DatabaseReference mreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        //call the Database groups
 
+        recyclerVGroups = (RecyclerView) findViewById(R.id.recycler_View);
+        recyclerVGroups.setHasFixedSize(true);
+
+        recyclerVGroups.setLayoutManager(new GridLayoutManager(this,2));
+        //call the Database groups
         //just the first 10
         Query groups = FirebaseDatabase.getInstance().getReference().child("groups").limitToFirst(10);
         mreference = groups.getRef();
         mreference.keepSynced(true);
 
-        myrv = (RecyclerView) findViewById(R.id.recycler_View);
-        myrv.setHasFixedSize(true);
 
-        myrv.setLayoutManager(new GridLayoutManager(this,2));
     }
 
     @Override
@@ -92,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
-        myrv.setAdapter(firebaseRecyclerAdapter);
+        recyclerVGroups.setAdapter(firebaseRecyclerAdapter);
     }
 
 

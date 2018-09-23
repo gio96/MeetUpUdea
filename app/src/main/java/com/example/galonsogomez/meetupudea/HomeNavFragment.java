@@ -25,9 +25,13 @@ import com.squareup.picasso.Picasso;
  * A simple {@link Fragment} subclass.
  */
 public class HomeNavFragment extends Fragment {
+    
+    // Views
+    private RecyclerView recyclerVGroups;
 
-    private RecyclerView myrv;
+    //Firebase
     private DatabaseReference mreference;
+
     public HomeNavFragment() {
         // Required empty public constructor
     }
@@ -45,11 +49,9 @@ public class HomeNavFragment extends Fragment {
         mreference = groups.getRef();
         mreference.keepSynced(true);
 
-        myrv = (RecyclerView) view.findViewById(R.id.recycler_View);
-        myrv.setHasFixedSize(true);
-
-        //POSIBLE PROBLEMA CON EL CONTEXTO
-        myrv.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        recyclerVGroups = (RecyclerView) view.findViewById(R.id.recyclerV_Group);
+        recyclerVGroups.setHasFixedSize(true);
+        recyclerVGroups.setLayoutManager(new GridLayoutManager(getActivity(),2));
         return view;
     }
 
@@ -64,44 +66,32 @@ public class HomeNavFragment extends Fragment {
                         (Group.class,R.layout.item_group,HomeActivity.GroupViewHolder.class,mreference) {
 
                     @Override
-                    public  void populateViewHolder(HomeActivity.GroupViewHolder groupViewHolder, final Group model , int position){
+                    public  void populateViewHolder(HomeActivity.GroupViewHolder groupViewHolder,
+                                                    final Group model , int position){
 
                         // To assign the info from Database to cardView
                         //groupViewHolder.setIdGroup(model.getGroupUID());
                         groupViewHolder.setTitle(model.getTitle());
 
-                        //POSIBLE ERROR DEL CONTEXT
                         groupViewHolder.setPicture(model.getPicture(),getActivity().getApplicationContext());
                         groupViewHolder.cardViewEvent1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                //Toast.makeText(view.getContext(),model.getGroupUID(), Toast.LENGTH_SHORT).show();
 
-                                //mandar datos a la activity
-                                Bundle bundle = new Bundle();
-                                bundle.putString("UID",model.getGroupUID());
-                                bundle.putString("title",model.getTitle());
-                                bundle.putString("picture",model.getPicture());
-                                bundle.putString("description",model.getDescription());
-
-                                //Log.d("bulde", bundle.toString());
-                                //Log.d("idcard",model.getGroupUID());
-
+                                Bundle bundleGroup = sendData(model);
                                 Intent intent = new Intent(getActivity(),ShowGroupActivity.class);
-                                intent.putExtras(bundle);
+                                intent.putExtras(bundleGroup);
                                 startActivity(intent);
-
                             }
                         });
 
                     }
                 };
 
-        myrv.setAdapter(firebaseRecyclerAdapter);
+        recyclerVGroups.setAdapter(firebaseRecyclerAdapter);
     }
 
     public static class GroupViewHolder extends RecyclerView.ViewHolder {
-
 
         View mview;
         TextView groupTitle;
@@ -134,4 +124,13 @@ public class HomeNavFragment extends Fragment {
         Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
         startActivity(intent);
     }*/
+
+    public Bundle sendData(Group group){
+        Bundle bundle = new Bundle();
+        bundle.putString("UID",group.getGroupUID());
+        bundle.putString("title",group.getTitle());
+        bundle.putString("picture",group.getPicture());
+        bundle.putString("description",group.getDescription());
+        return bundle;
+    }
 }

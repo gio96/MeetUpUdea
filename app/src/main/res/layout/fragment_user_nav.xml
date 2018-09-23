@@ -29,10 +29,9 @@
                 />
 
             <TextView
-                android:id="@+id/txt_User_Frag"
+                android:id="@+id/txt_User_Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre Usuario"
                 android:textColor="@android:color/black"
                 android:layout_gravity="top|left"
                 android:fontFamily="sans-serif-light"
@@ -59,8 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:onClick="onClick"
             android:layout_marginEnd="59dp"
-            android:text="Salir" />
+            android:text="@string/btnSignOut" />
 
     </RelativeLayout>
     <!--<LinearLayout

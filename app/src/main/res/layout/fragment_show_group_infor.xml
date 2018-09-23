@@ -9,10 +9,12 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/text_ViewInfor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/textViewInfor"
             android:inputType="textMultiLine"
-            android:textStyle="bold"/>
+            android:textSize="15sp"
+            android:textStyle="normal"
+            android:layout_gravity="center_horizontal"/>
     </ScrollView>
 </FrameLayout>

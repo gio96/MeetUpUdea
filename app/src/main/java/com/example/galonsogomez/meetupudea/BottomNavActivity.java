@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 public class BottomNavActivity extends AppCompatActivity {
 
+
+    //Views
     private TextView mTextMessage;
 
     @Override
@@ -18,11 +20,12 @@ public class BottomNavActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bottom_nav);
 
         mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.btn_Navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //Default view
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeNavFragment()).commit();
+        getSupportFragmentManager().beginTransaction().
+                replace(R.id.fragment_container,new HomeNavFragment()).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -45,7 +48,8 @@ public class BottomNavActivity extends AppCompatActivity {
                     selectedFragment = new UserNavFragment();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.fragment_container,selectedFragment).commit();
             return true;
         }
     };

@@ -9,15 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TextView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ShowGroupInforFragment extends Fragment {
+    
+    // Views
+    private TextView descriptionGroup;
 
-    EditText editText;
-    TextView textView;
     public ShowGroupInforFragment() {
         // Required empty public constructor
     }
@@ -39,8 +41,8 @@ public class ShowGroupInforFragment extends Fragment {
     }
 
     public void setDescription(String description, View view){
-        textView = view.findViewById(R.id.textViewInfor);
-        textView.setText(description);
+        descriptionGroup = view.findViewById(R.id.text_ViewInfor);
+        descriptionGroup.setText(description);
     }
 
 }
