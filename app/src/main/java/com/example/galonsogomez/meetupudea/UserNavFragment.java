@@ -74,7 +74,10 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
 
         switch (v.getId()) {
             case R.id.btn_Logout:
-                signOut();
+                Fragment createGroup = new CreateGroupFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().
+                        replace(R.id.fragment_container,createGroup).commit();
+                //signOut();
                 break;
         }
     }

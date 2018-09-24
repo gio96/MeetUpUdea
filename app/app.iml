@@ -111,6 +111,7 @@
     <orderEntry type="library" name="com.google.firebase:firebase-database-16.0.1" level="project" />
     <orderEntry type="library" name="com.android.support:appcompat-v7-27.1.1" level="project" />
     <orderEntry type="library" name="com.android.support:design-27.1.1" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-storage-common-16.0.1" level="project" />
     <orderEntry type="library" name="de.hdodenhof:circleimageview-2.2.0" level="project" />
     <orderEntry type="library" name="com.android.support:transition-27.1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="com.squareup:javawriter:2.1.1@jar" level="project" />
@@ -161,6 +162,7 @@
     <orderEntry type="library" name="com.google.firebase:firebase-common-16.0.0" level="project" />
     <orderEntry type="library" name="android.arch.lifecycle:livedata-core-1.1.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-ads-identifier-15.0.1" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-storage-16.0.1" level="project" />
     <orderEntry type="library" name="com.github.florent37:diagonallayout-1.0.9" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-27.1.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-media-compat-27.1.1" level="project" />
