@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.storage.StorageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -40,10 +43,11 @@ public class ShowGroupActivity extends AppCompatActivity {
 
     private String uidGroup;
     boolean following = false;
+    boolean isOwn = false;
 
     // Firebase
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mDatabaseReference;
+    //private DatabaseReference mDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,89 +69,148 @@ public class ShowGroupActivity extends AppCompatActivity {
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         final OvershootInterpolator interpolator = new OvershootInterpolator();
 
+        esMio(uidGroup);
+
+        if(!isOwn){
+
+            //Through the whole section of "following" in Firebase
+            //---------------------------------------------------------------------------------------------------------
+            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference mDatabaseReferenceFollowing = mFirebaseDatabase.getReference().child("users")
+                    .child(firebaseUser.getUid()).child("following");
+            mDatabaseReferenceFollowing.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Group group = new Group();
+                    for(DataSnapshot ds : dataSnapshot.getChildren()){
+                        group = ds.getValue(Group.class);
+                        if(uidGroup.equals(group.getGroupUID())){
+
+                            //Variable to handle the follow and unfollow
+                            following = true;
+                            floatingActionButton.setImageDrawable(ContextCompat
+                                    .getDrawable(getApplicationContext(),R.drawable.heart));
+                        }else{
+                            //---------------
+                            //following = false;
+                            Log.d("unfollow", "No sigue al grupo");
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        //following/unfollowing/create Event
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isOwn){
+                    //Call the Activity to create Events and send data
+                    /*Bundle bundle = new Bundle();
+                    bundle.putString("groupUID",uidGroup);*/
+
+                    Intent intent = new Intent(ShowGroupActivity.this,CreateEventActivity.class);
+                    intent.putExtra("groupUID",uidGroup);
+                    startActivity(intent);
+
+                    Log.d("isOWn", "CREANDO LA ACTIVIDAD");
+                }else{
+                    if(following){
+
+                        floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext()
+                                ,R.drawable.heart_outline));
+                        Snackbar.make(view, "Dejar de seguir",Snackbar.LENGTH_LONG)
+                                .setAction("Action",null).show();
+
+//---------------------------------------------------------------------------------------------------------------------------
+                        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                        mFirebaseDatabase = FirebaseDatabase.getInstance();
+                        DatabaseReference mDatabaseReferenceFollowing = mFirebaseDatabase.getReference().child("users")
+                                .child(firebaseUser.getUid()).child("following");
+
+                        mDatabaseReferenceFollowing.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Group groupDelete = new Group();
+                                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                                    groupDelete = ds.getValue(Group.class);
+                                    if(uidGroup.equals(groupDelete.getGroupUID())){
+                                        ds.getRef().removeValue();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        following =false;
+
+                    }else{
+                        Snackbar.make(view, "Siguiendo",Snackbar.LENGTH_LONG)
+                                .setAction("Action",null).show();
+                        floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
+                                R.drawable.heart));
+                        setFollowing(uidGroup);
+                    }
+
+                }
+            }
+        });
         createTabs();
 
-        firebaseDb();
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+    }
 
+    public void esMio(String groupUiD){
+
+
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        //DatabaseReference mDatabaseReferenceFollowing = mFirebaseDatabase.getReference().child("users").child(firebaseUser.getUid()).child("following");
+
+
+        DatabaseReference mDatabaseReferenceGroup = mFirebaseDatabase.getReference().child("groups").child(groupUiD);
+
+        mDatabaseReferenceGroup.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Group group = new Group();
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                   group = ds.getValue(Group.class);
-                   //Log.d("grupoD",group.getGroupUID());
+                String uidUser= dataSnapshot.getValue(User.class).getUserUID();
+                if(uidUser.equals(firebaseUser.getUid())){
+                    Log.d("mani","el grupo es mio");
+                    floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
+                            R.drawable.ic_add_black_24dp));
 
-                   //Verify if the user following the user and fill the heart
-                   if(uidGroup.equals(group.getGroupUID())){
+                    //The group is mine
+                    isOwn = true;
 
-                       //Variable to handle the follow and unfollow
-                        following = true;
-                       floatingActionButton.setImageDrawable(ContextCompat
-                               .getDrawable(getApplicationContext(),R.drawable.heart));
-                   }else{
-                       Log.d("unfollow", "No sigue al grupo");
-                   }
-
+                }else {
+                    Log.d("mani","el grupo NO es mio");
+                    isOwn = false;
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("follow", "Data not found");
-            }
-        });
-
-
-
-        //following/unfollowing
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(following){
-
-                    floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext()
-                            ,R.drawable.heart_outline));
-                    Snackbar.make(view, "Dejar de seguir",Snackbar.LENGTH_LONG)
-                            .setAction("Action",null).show();
-                    firebaseDb();
-                    mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Group groupDelete = new Group();
-                            for(DataSnapshot ds : dataSnapshot.getChildren()){
-                                groupDelete = ds.getValue(Group.class);
-                                if(uidGroup.equals(groupDelete.getGroupUID())){
-                                    ds.getRef().removeValue();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                    following =false;
-
-                }else{
-                    Snackbar.make(view, "Siguiendo",Snackbar.LENGTH_LONG)
-                            .setAction("Action",null).show();
-                    floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
-                            R.drawable.heart));
-                    setFollowing(uidGroup);
-                }
+                Log.d("mani","No hay ningun datos");
             }
         });
     }
 
-
-    public void setFollowing(String uid)
+    public void setFollowing(String uidGroup)
     {
-        Group group = new Group(uid);
+        Group group = new Group(uidGroup);
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         //User user = new  User(firebaseUser.getUid());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference();
+        DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference();
         mDatabaseReference.child("users").child(firebaseUser.getUid()).child("following").push().setValue(group);
     }
 
@@ -178,13 +241,6 @@ public class ShowGroupActivity extends AppCompatActivity {
         //adapter setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    public void firebaseDb(){
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference().child("users")
-                .child(firebaseUser.getUid()).child("following");
     }
 
 }

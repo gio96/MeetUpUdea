@@ -2,6 +2,8 @@
     <string name="app_name">MeetUpUdeA</string>
     <string name="app_name2">Meet Up UdeA</string>
     <string name="btnSignOut">Salir</string>
+    <string name="btnCreate">Crear</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

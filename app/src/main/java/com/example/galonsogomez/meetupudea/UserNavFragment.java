@@ -26,6 +26,7 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
     // Views
     private TextView txtUserName;
     private Button btnLogOut;
+    private Button btnCreate;
     de.hdodenhof.circleimageview.CircleImageView circleImageView;
 
     public UserNavFragment() {
@@ -41,6 +42,8 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_user_nav, container, false);
         btnLogOut = view.findViewById(R.id.btn_Logout);
         btnLogOut.setOnClickListener(this);
+        btnCreate = view.findViewById(R.id.btn_Create);
+        btnCreate.setOnClickListener(this);
 
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -74,11 +77,14 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
 
         switch (v.getId()) {
             case R.id.btn_Logout:
+                signOut();
+                break;
+            case R.id.btn_Create:
                 Fragment createGroup = new CreateGroupFragment();
                 getActivity().getSupportFragmentManager().beginTransaction().
                         replace(R.id.fragment_container,createGroup).commit();
-                //signOut();
                 break;
+
         }
     }
 }

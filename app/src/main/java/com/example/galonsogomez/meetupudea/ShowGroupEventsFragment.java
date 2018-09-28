@@ -22,6 +22,10 @@ public class ShowGroupEventsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //Get data from Activity
+        Bundle b = getActivity().getIntent().getExtras();
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_show_group_events, container, false);
         return view;

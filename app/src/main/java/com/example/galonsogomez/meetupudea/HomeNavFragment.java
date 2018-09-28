@@ -46,10 +46,11 @@ public class HomeNavFragment extends Fragment {
 
         //call the Database just the first 10 groups
         Query groups = FirebaseDatabase.getInstance().getReference().child("groups").limitToFirst(10);
+        recyclerVGroups = (RecyclerView) view.findViewById(R.id.recyclerV_Group);
         mreference = groups.getRef();
         mreference.keepSynced(true);
 
-        recyclerVGroups = (RecyclerView) view.findViewById(R.id.recyclerV_Group);
+
         recyclerVGroups.setHasFixedSize(true);
         recyclerVGroups.setLayoutManager(new GridLayoutManager(getActivity(),2));
         return view;

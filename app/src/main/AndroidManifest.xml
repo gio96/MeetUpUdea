@@ -17,11 +17,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeActivity" />
-        <activity android:name=".ShowGroupActivity"
-            android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".ShowGroupActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".BottomNavActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
+        <activity android:name=".CreateEventActivity"></activity>
     </application>
 
 </manifest>
