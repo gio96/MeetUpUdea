@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateEventFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/text_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/text_Date"
+            android:ems="10"
+            android:hint="Name" />
+
+        <EditText
+            android:id="@+id/text_Place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/text_Date"
+            android:layout_marginTop="61dp"
+            android:ems="10"
+            android:hint="Lugar" />
+
+        <Button
+            android:id="@+id/btn_Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/text_Date"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="18dp"
+            android:drawableTop="@drawable/ic_today_black_24dp"
+            android:text="Fecha" />
+
+        <EditText
+            android:id="@+id/text_Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/text_Time"
+            android:layout_marginTop="153dp"
+            android:ems="10"
+            android:focusable="false" />
+
+        <Button
+            android:id="@+id/btn_Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/text_Time"
+            android:layout_alignStart="@+id/btn_Date"
+            android:drawableTop="@drawable/ic_access_time_black_24dp"
+            android:text="hora" />
+
+        <EditText
+            android:id="@+id/text_Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="13dp"
+            android:ems="10"
+            android:focusable="false" />
+
+
+        <EditText
+            android:id="@+id/text_Description_Event"
+            android:layout_width="375dp"
+            android:layout_height="113dp"
+            android:layout_above="@+id/btn_Create"
+            android:layout_alignParentStart="true"
+            android:ems="10"
+            android:hint="Description"
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="66dp" />
+
+
+        <Button
+            android:id="@+id/btn_Create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_button"
+            android:onClick="onClick"
+            android:text="@string/btnCreate" />
+
+        <EditText
+            android:id="@+id/editText_Cantidad"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/text_Name"
+            android:layout_marginBottom="175dp"
+            android:ems="10"
+            android:hint="Cantidad"
+            android:inputType="numberSigned" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="183dp"
+            android:layout_marginStart="109dp"
+            android:text="SI/NO" />
+
+
+    </RelativeLayout>
+
+
+
+</FrameLayout>

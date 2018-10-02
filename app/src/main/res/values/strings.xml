@@ -16,5 +16,6 @@
     <string name="hint_createGroup_title">Nombre</string>
     <string name="hint_createGroup_description">¿Quien debería unirse y que harán juntos?</string>
     <string name="button_CreateGroup">+ Grupo</string>
+    <string name="title_activity_create_group_elements">CreateGroupElementsActivity</string>
 
 </resources>

@@ -116,7 +116,8 @@ public class ShowGroupActivity extends AppCompatActivity {
                     /*Bundle bundle = new Bundle();
                     bundle.putString("groupUID",uidGroup);*/
 
-                    Intent intent = new Intent(ShowGroupActivity.this,CreateEventActivity.class);
+                    //Intent intent = new Intent(ShowGroupActivity.this,CreateEventActivity.class);
+                    Intent intent = new Intent(ShowGroupActivity.this,CreateGroupElementsActivity.class);
                     intent.putExtra("groupUID",uidGroup);
                     startActivity(intent);
 

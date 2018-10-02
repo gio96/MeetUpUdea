@@ -1,47 +1,48 @@
 package com.example.galonsogomez.meetupudea;
 
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-public class CreateEventActivity extends AppCompatActivity implements View.OnClickListener {
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class CreateEventFragment extends Fragment implements View.OnClickListener{
 
     Button buttonDate,buttonTime;
     EditText editTextDate,editTextTime;
     private int dia,mes,año,hora,minutos;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_event);
-
-
-        String b = getIntent().getStringExtra("groupUID");
-        Log.d("createEvent", b);
-
-        buttonDate = (Button) findViewById(R.id.btn_Date);
-        editTextDate = (EditText) findViewById(R.id.text_Date);
-        buttonDate.setOnClickListener(this);
-
-        buttonTime = (Button) findViewById(R.id.btn_Time);
-        editTextTime = (EditText) findViewById(R.id.text_Time);
-        buttonTime.setOnClickListener(this);
-        //finish();
+    public CreateEventFragment() {
+        // Required empty public constructor
     }
 
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_create_event, container, false);
+        buttonDate = (Button) view.findViewById(R.id.btn_Date);
+        editTextDate = (EditText) view.findViewById(R.id.text_Date);
+        buttonDate.setOnClickListener(this);
+
+        buttonTime = (Button) view.findViewById(R.id.btn_Time);
+        editTextTime = (EditText) view.findViewById(R.id.text_Time);
+        buttonTime.setOnClickListener(this);
+        return view;
+    }
 
     @Override
     public void onClick(View view) {
@@ -52,7 +53,7 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
                 mes = calendar.get(Calendar.MONTH);
                 año = calendar.get(Calendar.YEAR);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfyear, int dayOfMonth) {
                         datePicker.init(2018,9,28,null);
@@ -67,7 +68,7 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
                 hora = cal.get(Calendar.HOUR);
                 minutos = cal.get(Calendar.MINUTE);
 
-                TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
                         editTextTime.setText(hourOfDay+":"+minute);
@@ -77,4 +78,5 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
                 break;
         }
     }
+
 }

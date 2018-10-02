@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
     private Button btnLogOut;
     private Button btnCreate;
     de.hdodenhof.circleimageview.CircleImageView circleImageView;
+    private RecyclerView recyclerViewUser;
 
     public UserNavFragment() {
         // Required empty public constructor
@@ -40,6 +43,13 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_nav, container, false);
+
+        recyclerViewUser = (RecyclerView) view.findViewById(R.id.recycler_View_Fragment_User);
+        recyclerViewUser.setHasFixedSize(true);
+
+        //this change to getActivity() /problem
+        recyclerViewUser.setLayoutManager(new GridLayoutManager(getActivity(),2));
+
         btnLogOut = view.findViewById(R.id.btn_Logout);
         btnLogOut.setOnClickListener(this);
         btnCreate = view.findViewById(R.id.btn_Create);
