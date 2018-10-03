@@ -17,8 +17,11 @@ public class CreateGroupElementsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_group_elements);
 
         //Obtener el valor uidgroup enviado desde showGroup
-        /*String b = getIntent().getStringExtra("groupUID");
-        Log.d("createEvent", b);*/
+        //String showGroup = getIntent().getStringExtra("groupUID");
+        Bundle bundle = getIntent().getExtras();
+        CreateEventFragment createEventFragment = new CreateEventFragment();
+        createEventFragment.setArguments(bundle);
+        //Log.d("createEvent", b);
 
         createTabs();
     }
