@@ -10,60 +10,64 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/text_Name"
+            android:id="@+id/text_Name_Event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/text_Date"
+            android:layout_alignStart="@+id/text_Date_Event"
             android:ems="10"
-            android:hint="Name" />
+            android:hint="Nombre"
+            android:inputType="textCapWords"
+            />
 
         <EditText
-            android:id="@+id/text_Place"
+            android:id="@+id/text_Place_Event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/text_Date"
+            android:layout_alignStart="@+id/text_Date_Event"
             android:layout_marginTop="61dp"
             android:ems="10"
-            android:hint="Lugar" />
+            android:hint="Lugar"
+            android:inputType="textCapWords"
+            android:drawableRight="@drawable/ic_place_black_24dp"/>
 
         <Button
-            android:id="@+id/btn_Date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/text_Date"
+            android:id="@+id/btn_Date_Event"
+            android:layout_width="53dp"
+            android:layout_height="43dp"
+            android:layout_alignBottom="@+id/text_Date_Event"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="18dp"
-            android:drawableTop="@drawable/ic_today_black_24dp"
-            android:text="Fecha" />
+            android:layout_marginEnd="53dp"
+            android:drawableTop="@drawable/ic_today_black_24dp" />
 
         <EditText
-            android:id="@+id/text_Date"
+            android:id="@+id/text_Date_Event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/text_Time"
-            android:layout_marginTop="153dp"
+            android:layout_alignStart="@+id/text_Time_Event"
+            android:layout_marginTop="115dp"
             android:ems="10"
-            android:focusable="false" />
+            android:focusable="false"/>
 
         <Button
-            android:id="@+id/btn_Time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/text_Time"
-            android:layout_alignStart="@+id/btn_Date"
+            android:id="@+id/btn_Time_Event"
+            android:layout_width="53dp"
+            android:layout_height="43dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/btn_Date_Event"
+            android:layout_marginTop="175dp"
             android:drawableTop="@drawable/ic_access_time_black_24dp"
-            android:text="hora" />
+             />
 
         <EditText
-            android:id="@+id/text_Time"
+            android:id="@+id/text_Time_Event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="13dp"
+            android:layout_alignTop="@+id/btn_Time_Event"
+            android:layout_marginStart="12dp"
             android:ems="10"
             android:focusable="false" />
 
@@ -71,46 +75,68 @@
         <EditText
             android:id="@+id/text_Description_Event"
             android:layout_width="375dp"
-            android:layout_height="113dp"
-            android:layout_above="@+id/btn_Create"
+            android:layout_height="86dp"
+            android:layout_above="@+id/btn_Create_Event"
             android:layout_alignParentStart="true"
             android:ems="10"
-            android:hint="Description"
-            android:inputType="textMultiLine"
+            android:hint="Descripción"
+            android:inputType="textMultiLine|textCapSentences"
             tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="66dp" />
+            tools:layout_editor_absoluteY="66dp"
+            />
 
 
         <Button
-            android:id="@+id/btn_Create"
+            android:id="@+id/btn_Create_Event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/rounded_button"
-            android:onClick="onClick"
             android:text="@string/btnCreate" />
 
-        <EditText
-            android:id="@+id/editText_Cantidad"
-            android:layout_width="82dp"
-            android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/btn_Add_Picture_Event"
+            android:layout_width="57dp"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/text_Name"
-            android:layout_marginBottom="175dp"
+            android:layout_alignStart="@+id/btn_Date_Event"
+            android:layout_marginBottom="224dp"
+            android:drawableRight="@android:drawable/ic_menu_camera"
+            android:elevation="10dp"/>
+
+        <ImageView
+            android:id="@+id/img_Picture_Event"
+            android:layout_width="92dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="202dp"
+            android:layout_marginStart="77dp"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+
+        <EditText
+            android:id="@+id/text_Quantity_Event"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/switch_Event"
+            android:layout_alignEnd="@+id/img_Picture_Event"
+            android:layout_marginEnd="-12dp"
             android:ems="10"
-            android:hint="Cantidad"
+            android:hint="#personas"
             android:inputType="numberSigned" />
 
+            android:textOff="NO"
+            android:textOn="SI"
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/switch_Event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="183dp"
-            android:layout_marginStart="109dp"
-            android:text="SI/NO" />
+            android:layout_alignStart="@+id/btn_Date_Event"
+            android:layout_marginBottom="155dp"
+            android:text="NO/SI"/>
 
 
     </RelativeLayout>
