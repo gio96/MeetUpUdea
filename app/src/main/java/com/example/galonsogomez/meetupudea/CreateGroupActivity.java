@@ -76,7 +76,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                 break;
 
             case R.id.btn_CreateGroup:
-                checkFields();
+
                 uploadGroup();
                 break;
         }
@@ -114,50 +114,56 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     private void uploadGroup(){
 
-        if(imgGroupUri!=null){
-            final StorageReference fileReference = mStorageReference.child(System.currentTimeMillis()+
-                    "." + getFileExtension(imgGroupUri));
+        if(checkFields() && imgGroupUri!=null) {
+
+                final StorageReference fileReference = mStorageReference.child(System.currentTimeMillis() +
+                        "." + getFileExtension(imgGroupUri));
 
 
-            // to can obtain Url from storage
-            UploadTask uploadTask = fileReference.putFile(imgGroupUri);
-            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()){
-                        throw task.getException();
+                // to can obtain Url from storage
+                UploadTask uploadTask = fileReference.putFile(imgGroupUri);
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
 
+                        }
+                        return fileReference.getDownloadUrl();
                     }
-                    return fileReference.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()){
-                        Uri downloadUri = task.getResult();
-                        String linkPicture = downloadUri.toString();
-                        // Create object group
-                        Group group = new Group(UUID.randomUUID().toString(),firebaseUser.getUid(),
-                                textTitleGroup.getText().toString(),linkPicture,
-                                textDescriptionGroup.getText().toString());
-                        // Add child
-                        mDatabaseReference.child(group.getGroupUID()).setValue(group);
-                        Toast.makeText(getApplicationContext(),"Grupo creado",Toast.LENGTH_SHORT).show();
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            String linkPicture = downloadUri.toString();
+                            // Create object group
+                            Group group = new Group(UUID.randomUUID().toString(), firebaseUser.getUid(),
+                                    textTitleGroup.getText().toString(), linkPicture,
+                                    textDescriptionGroup.getText().toString());
+                            // Add child
+                            mDatabaseReference.child(group.getGroupUID()).setValue(group);
+                            Toast.makeText(getApplicationContext(), "Grupo creado", Toast.LENGTH_SHORT).show();
 
-                        cleanFields();
-                        Log.d("createGroup", linkPicture);
+                            cleanFields();
+                            Log.d("createGroup", linkPicture);
+                        }
                     }
-                }
-            });
-        }
-        else{
-            Toast.makeText(getApplicationContext(),"Imagen no seleccionada",Toast.LENGTH_SHORT).show();
-        }
+                });
+            } else {
+            Toast.makeText(getApplicationContext(),"Existen campos vacíos",Toast.LENGTH_SHORT).show();
+            }
+
     }
 
-    private void checkFields(){
-        if(textTitleGroup.equals("") ||textDescriptionGroup.equals("")){
-            Toast.makeText(getApplicationContext(),"Existen campos vacíos",Toast.LENGTH_SHORT).show();
+    private boolean checkFields(){
+        if(textTitleGroup.getText().toString().equals("") ||textDescriptionGroup.getText().toString().equals("")){
+            //Toast.makeText(getApplicationContext(),"Existen campos vacíos",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else{
+            Log.d("checkFields", "checkFields: Crear grupo");
+            return true;
         }
     }
 
