@@ -113,7 +113,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
     private void uploadGroup(){
-
+        initFirebase();
         if(checkFields() && imgGroupUri!=null) {
 
                 final StorageReference fileReference = mStorageReference.child(System.currentTimeMillis() +
@@ -145,6 +145,11 @@ public class CreateGroupActivity extends AppCompatActivity {
                             mDatabaseReference.child(group.getGroupUID()).setValue(group);
                             Toast.makeText(getApplicationContext(), "Grupo creado", Toast.LENGTH_SHORT).show();
 
+                            mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+                            mDatabaseReference.child("users").child(firebaseUser.getUid()).child("myGroups")
+                                    .push()
+                                    .setValue(group.getGroupUID());
+
                             cleanFields();
                             Log.d("createGroup", linkPicture);
                         }
@@ -171,6 +176,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         textTitleGroup.setText("");
         textDescriptionGroup.setText("");
         imgPictureGroup.setImageDrawable(null);
+        imgGroupUri = null;
     }
 
 }
