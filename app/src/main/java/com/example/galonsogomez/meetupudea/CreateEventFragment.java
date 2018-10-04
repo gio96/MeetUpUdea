@@ -40,6 +40,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.SimpleTimeZone;
 import java.util.UUID;
 
@@ -199,11 +200,15 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
-                        editTextDateEvent.setText(day+"/"+ (month + 1)+"/"+year);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM yyyy");
+                        calendar.set(Calendar.DAY_OF_MONTH,day);
+                        calendar.set(Calendar.MONTH,month);
+                        calendar.set(Calendar.YEAR,year);
+                        //Log.d("fechass",simpleDateFormat.format(calendar.getTime()));
+                        editTextDateEvent.setText(simpleDateFormat.format(calendar.getTime()));
                     }
                 },dia,mes,año);
-                datePickerDialog.updateDate(2018,1,1);
+                datePickerDialog.updateDate(2018,0,1);
                 datePickerDialog.show();
                 break;
 
@@ -278,6 +283,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         editTextDescriptionEvent.setText("");
         editTextQuantity.setText("");
         imgPictureEvent.setImageResource(R.drawable.ic_photo_black_24dp);
+        imgEventUri= null;
     }
 
    private void initFirebase(){

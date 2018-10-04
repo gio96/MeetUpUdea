@@ -2,7 +2,7 @@
     <string name="app_name">MeetUpUdeA</string>
     <string name="app_name2">Meet Up UdeA</string>
     <string name="btnSignOut">Salir</string>
-    <string name="btnCreate">Crear</string>
+    <string name="button_Create">Crear</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
