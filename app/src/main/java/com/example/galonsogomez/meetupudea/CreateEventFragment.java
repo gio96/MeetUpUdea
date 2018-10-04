@@ -4,10 +4,13 @@ import android.content.ContentResolver;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -34,7 +38,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.SimpleTimeZone;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
@@ -78,8 +84,6 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         //Get data from Activity
         Bundle b = getActivity().getIntent().getExtras();
         uidGroup = b.getString("groupUID");
-
-        Log.d("sies", uidGroup);
 
         castingViews(view);
         initFirebase();
@@ -194,11 +198,12 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker datePicker, int year, int monthOfyear, int dayOfMonth) {
-                        datePicker.init(2018,9,28,null);
-                        editTextDateEvent.setText(dayOfMonth+"/"+ (monthOfyear + 1)+"/"+year);
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                        editTextDateEvent.setText(day+"/"+ (month + 1)+"/"+year);
                     }
                 },dia,mes,año);
+                datePickerDialog.updateDate(2018,1,1);
                 datePickerDialog.show();
                 break;
 
@@ -210,9 +215,12 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                 TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-                        editTextTimeEvent.setText(hourOfDay+":"+minute);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm aa");
+                        cal.set(Calendar.HOUR,hourOfDay);
+                        cal.set(Calendar.MINUTE,minute);
+                        editTextTimeEvent.setText(simpleDateFormat.format(cal.getTime()));
                     }
-                },hora,minutos,false);
+                },hora,minutos, false);
                 timePickerDialog.show();
                 break;
         }
@@ -269,7 +277,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         editTextTimeEvent.setText("");
         editTextDescriptionEvent.setText("");
         editTextQuantity.setText("");
-        imgPictureEvent.setImageDrawable(null);
+        imgPictureEvent.setImageResource(R.drawable.ic_photo_black_24dp);
     }
 
    private void initFirebase(){
@@ -282,8 +290,17 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
     public void setEvent(String uidGroup,String linkPicture)
     {
-        Event event = new Event(UUID.randomUUID().toString(),editTextNameEvent.getText().toString(),editTextPlaceEvent.getText().toString()
-                ,editTextDateEvent.getText().toString(),editTextTimeEvent.getText().toString(),linkPicture,editTextDescriptionEvent.getText().toString());
+        Event event = new Event();
+        if(editTextQuantity.getText().toString().equals(""))
+        {
+            event = new Event(UUID.randomUUID().toString(),editTextNameEvent.getText().toString(),editTextPlaceEvent.getText().toString()
+                    ,editTextDateEvent.getText().toString(),editTextTimeEvent.getText().toString(),linkPicture,editTextDescriptionEvent.getText().toString());
+            Log.d("quant", "esvacio");
+        }else {
+            event =  new Event(UUID.randomUUID().toString(),editTextNameEvent.getText().toString(),editTextPlaceEvent.getText().toString()
+                    ,editTextDateEvent.getText().toString(),editTextTimeEvent.getText().toString(),linkPicture,editTextQuantity.getText().toString(),editTextDescriptionEvent.getText().toString());
+            Log.d("quant", "estalleno");
+        }
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference();
         mDatabaseReference.child("groups").child(uidGroup).child("events").child(event.getEventUID()).setValue(event);

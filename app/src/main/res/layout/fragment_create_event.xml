@@ -126,9 +126,6 @@
             android:ems="10"
             android:hint="#personas"
             android:inputType="numberSigned" />
-
-            android:textOff="NO"
-            android:textOn="SI"
         <Switch
             android:id="@+id/switch_Event"
             android:layout_width="wrap_content"
@@ -137,6 +134,16 @@
             android:layout_alignStart="@+id/btn_Date_Event"
             android:layout_marginBottom="155dp"
             android:text="NO/SI"/>
+
+        <!--<DatePicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            android:visibility="invisible"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+        </DatePicker>-->
 
 
     </RelativeLayout>
