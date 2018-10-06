@@ -301,16 +301,15 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         {
             event = new Event(UUID.randomUUID().toString(),editTextNameEvent.getText().toString(),editTextPlaceEvent.getText().toString()
                     ,editTextDateEvent.getText().toString(),editTextTimeEvent.getText().toString(),linkPicture,editTextDescriptionEvent.getText().toString());
-            Log.d("quant", "esvacio");
+
         }else {
             event =  new Event(UUID.randomUUID().toString(),editTextNameEvent.getText().toString(),editTextPlaceEvent.getText().toString()
                     ,editTextDateEvent.getText().toString(),editTextTimeEvent.getText().toString(),linkPicture,editTextQuantity.getText().toString(),editTextDescriptionEvent.getText().toString());
-            Log.d("quant", "estalleno");
+
         }
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference();
         mDatabaseReference.child("groups").child(uidGroup).child("events").child(event.getEventUID()).setValue(event);
-        Log.d("raro",event.getEventUID());
     }
 
 }

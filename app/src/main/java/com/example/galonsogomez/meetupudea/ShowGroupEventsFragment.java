@@ -1,11 +1,27 @@
 package com.example.galonsogomez.meetupudea;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -13,7 +29,9 @@ import android.view.ViewGroup;
  */
 public class ShowGroupEventsFragment extends Fragment {
 
-
+    private RecyclerView recyclerVShowEvent;
+    //Firebase
+    private DatabaseReference mreference;
     public ShowGroupEventsFragment() {
         // Required empty public constructor
     }
@@ -25,10 +43,97 @@ public class ShowGroupEventsFragment extends Fragment {
 
         //Get data from Activity
         Bundle b = getActivity().getIntent().getExtras();
+        String uidGroup = b.getString("UID");
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_show_group_events, container, false);
+
+        //call the Database just the first 10 groups
+        Query events = FirebaseDatabase.getInstance().getReference().child("groups").child(uidGroup).child("events").limitToFirst(5);
+        recyclerVShowEvent = (RecyclerView) view.findViewById(R.id.recyclerV_Show_Event);
+        mreference = events.getRef();
+        mreference.keepSynced(true);
+
+        recyclerVShowEvent.setHasFixedSize(true);
+        recyclerVShowEvent.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseRecyclerAdapter<Event,ItemViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Event,ItemViewHolder>
+                        (Event.class,R.layout.item_event_tab,ItemViewHolder.class,mreference) {
+
+                    @Override
+                    public  void populateViewHolder(ItemViewHolder groupViewHolder, final Event model , int position){
+
+                        // To assign the info from Database to cardView
+                        //groupViewHolder.setIdGroup(model.getGroupUID());
+                        groupViewHolder.setData(model.getTitle(),model.getPlace(),model.getTime(),model.getDate());
+                        groupViewHolder.setPicture(model.getPicture(),getActivity().getApplicationContext());
+                        groupViewHolder.cardViewEvent1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(view.getContext(),"me clickeo", Toast.LENGTH_SHORT).show();
+
+                                //mandar datos a la activity
+                               /* Bundle bundle = new Bundle();
+                                bundle.putString("UID",model.getGroupUID());
+                                bundle.putString("title",model.getTitle());
+                                bundle.putString("picture",model.getPicture());
+                                bundle.putString("description",model.getDescription());
+
+                                //Log.d("bulde", bundle.toString());
+                                //Log.d("idcard",model.getGroupUID());
+
+                                Intent intent = new Intent(HomeActivity.this,ShowGroupActivity.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);*/
+
+                            }
+                        });
+
+                    }
+                };
+
+        recyclerVShowEvent.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    public static class ItemViewHolder extends RecyclerView.ViewHolder {
+
+        View mview;
+        TextView eventTitle,eventPlace,eventHour,eventDate;
+        ImageView eventPicture;
+        CardView cardViewEvent1 = (CardView) itemView.findViewById(R.id.cv_Item_Tab);
+        public  ItemViewHolder(View itemView){
+            super(itemView);
+            mview = itemView;
+        }
+
+        public void setData(String title,String place,String hour,String date){
+            eventTitle = (TextView) itemView.findViewById(R.id.text_Title_Event_Tab);
+            eventTitle.setText(title);
+
+            eventPlace = (TextView) itemView.findViewById(R.id.text_Place_Event_Tab);
+            eventPlace.setText(place);
+
+            eventHour = (TextView) itemView.findViewById(R.id.text_Hour_Event_Tab);
+            eventHour.setText(hour);
+
+            eventDate = (TextView) itemView.findViewById(R.id.text_Date_Event_Tab);
+            eventDate.setText(date);
+
+        }
+
+        public void setPicture(String picture, Context c) {
+            eventPicture = (ImageView) itemView.findViewById(R.id.img_Picture_Event_Tab);
+            Picasso.with(c).load(picture)
+                    .fit()
+                    .centerCrop()
+                    .into(eventPicture);
+        }
+
+    }
 }

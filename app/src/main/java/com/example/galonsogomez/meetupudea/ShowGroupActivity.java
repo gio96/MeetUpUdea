@@ -1,5 +1,6 @@
 package com.example.galonsogomez.meetupudea;
 
+import android.animation.Animator;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.storage.StorageManager;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -19,7 +21,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,9 +45,15 @@ public class ShowGroupActivity extends AppCompatActivity {
     private TextView textTitleGroup;
     private FloatingActionButton floatingActionButton;
 
+    private LinearLayout desple;
+    //private ConstraintLayout first;
+    private LinearLayout second;
+
     private String uidGroup;
     boolean following = false;
     boolean isOwn = false;
+
+    boolean openInformation = true;
 
     // Firebase
     private FirebaseDatabase mFirebaseDatabase;
@@ -57,9 +67,15 @@ public class ShowGroupActivity extends AppCompatActivity {
         //Get data from each group from HomeNavFragment
         Bundle b = getIntent().getExtras();
         ShowGroupInforFragment showGroupInforFragment = new ShowGroupInforFragment();
+        ShowGroupEventsFragment showGroupEventsFragment = new ShowGroupEventsFragment();
         //Send data to fragments
         showGroupInforFragment.setArguments(b);
+        showGroupEventsFragment.setArguments(b);
 
+
+        desple = (LinearLayout) findViewById(R.id.desplegable);
+        //first = (ConstraintLayout) findViewById(R.id.firstLayout);
+        second = (LinearLayout) findViewById(R.id.secondLayout);
 
         //Set Data
         setTitle(b.getString("title"));
@@ -168,6 +184,33 @@ public class ShowGroupActivity extends AppCompatActivity {
         });
         createTabs();
 
+    }
+
+    //Information Dropdown
+    public void onClick(View v){
+        switch(v.getId()){
+            case R.id.in:
+                if(openInformation)
+                {
+
+                    desple.setVisibility(View.VISIBLE);
+                    /*TranslateAnimation animate = new TranslateAnimation(0,0,0,desple.getHeight());
+                    animate.setDuration(300);
+                    animate.setFillAfter(true);
+                    desple.startAnimation(animate);*/
+
+
+                    ((LinearLayout.LayoutParams) second.getLayoutParams()).weight = 3f;
+                    openInformation = false;
+                }else {
+
+                    desple.setVisibility(View.GONE);
+                    ((LinearLayout.LayoutParams) second.getLayoutParams()).weight = 1f;
+                    openInformation = true;
+                }
+
+                break;
+        }
     }
 
     public void esMio(String groupUiD){

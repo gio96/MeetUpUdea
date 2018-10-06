@@ -62,12 +62,12 @@ public class HomeNavFragment extends Fragment {
         //Create firebaseRecyclerAdapter with a viewHolder to show the info of the
         // Database
 
-        FirebaseRecyclerAdapter<Group,HomeActivity.GroupViewHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<Group,HomeActivity.GroupViewHolder>
-                        (Group.class,R.layout.item_group,HomeActivity.GroupViewHolder.class,mreference) {
+        FirebaseRecyclerAdapter<Group,GroupViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Group,GroupViewHolder>
+                        (Group.class,R.layout.item_group,GroupViewHolder.class,mreference) {
 
                     @Override
-                    public  void populateViewHolder(HomeActivity.GroupViewHolder groupViewHolder,
+                    public  void populateViewHolder(GroupViewHolder groupViewHolder,
                                                     final Group model , int position){
 
                         // To assign the info from Database to cardView
