@@ -76,21 +76,21 @@ public class ShowGroupEventsFragment extends Fragment {
                         groupViewHolder.cardViewEvent1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Toast.makeText(view.getContext(),"me clickeo", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(view.getContext(),model.getTime(), Toast.LENGTH_SHORT).show();
 
-                                //mandar datos a la activity
-                               /* Bundle bundle = new Bundle();
-                                bundle.putString("UID",model.getGroupUID());
-                                bundle.putString("title",model.getTitle());
-                                bundle.putString("picture",model.getPicture());
-                                bundle.putString("description",model.getDescription());
+                                //Send data to ShowEventActivity
+                               Bundle bundle = new Bundle();
+                                bundle.putString("uidEvent",model.getEventUID());
+                                bundle.putString("titleEvent",model.getTitle());
+                                bundle.putString("pictureEvent",model.getPicture());
+                                bundle.putString("descriptionEvent",model.getDescription());
+                                bundle.putString("dateEvent", model.getDate());
+                                bundle.putString("placeEvent", model.getPlace());
+                                bundle.putString("HourEvent", model.getTime());
 
-                                //Log.d("bulde", bundle.toString());
-                                //Log.d("idcard",model.getGroupUID());
-
-                                Intent intent = new Intent(HomeActivity.this,ShowGroupActivity.class);
+                                Intent intent = new Intent(getActivity(),ShowEventActivity.class);
                                 intent.putExtras(bundle);
-                                startActivity(intent);*/
+                                startActivity(intent);
 
                             }
                         });
@@ -100,6 +100,7 @@ public class ShowGroupEventsFragment extends Fragment {
 
         recyclerVShowEvent.setAdapter(firebaseRecyclerAdapter);
     }
+
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
 

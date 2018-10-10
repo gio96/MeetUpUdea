@@ -22,6 +22,10 @@ public class Event {
         this.description = description;
     }
 
+    public Event(String eventUID) {
+        this.eventUID = eventUID;
+    }
+
     public Event(String eventUID, String title, String place, String date, String time, String picture, String description) {
         this.eventUID = eventUID;
         this.title = title;
@@ -29,6 +33,7 @@ public class Event {
         this.date = date;
         this.time = time;
         this.picture = picture;
+
         this.description = description;
     }
 
