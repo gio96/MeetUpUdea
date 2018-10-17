@@ -33,7 +33,6 @@ public class Event {
         this.date = date;
         this.time = time;
         this.picture = picture;
-
         this.description = description;
     }
 

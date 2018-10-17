@@ -55,9 +55,8 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     private Button buttonDate,buttonTime;
     private int dia,mes,año,hora,minutos;
 
-    private  EditText editTextNameEvent,editTextPlaceEvent,editTextDateEvent,editTextTimeEvent,editTextDescriptionEvent,editTextQuantity;
+    private  EditText editTextNameEvent,editTextPlaceEvent,editTextDateEvent,editTextTimeEvent,editTextDescriptionEvent;
     private Button buttonAddImage,buttonCreateEvent;
-    private Switch aSwitch;
 
     private ImageView imgPictureEvent;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -88,23 +87,6 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
         castingViews(view);
         initFirebase();
-
-
-        //Handle behavior of switch
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked)
-                {
-                    Log.d("switch","verdad");
-                    editTextQuantity.setEnabled(true);
-                }else {
-                    editTextQuantity.setEnabled(false);
-                    editTextQuantity.setText("");
-                    Log.d("switch","falso");
-                }
-            }
-        });
         return view;
     }
 
@@ -120,7 +102,6 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    //Check form fields except for field Quantity
     private boolean checkFields(){
 
         //CHECK ASSISTANT FIELD
@@ -148,15 +129,12 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         editTextDateEvent = (EditText) view.findViewById(R.id.text_Date_Event);
         editTextTimeEvent = (EditText) view.findViewById(R.id.text_Time_Event);
         editTextDescriptionEvent = (EditText) view.findViewById(R.id.text_Description_Event);
-        editTextQuantity = (EditText) view.findViewById(R.id.text_Quantity_Event);
 
         buttonAddImage = (Button) view.findViewById(R.id.btn_Add_Picture_Event);
         buttonAddImage.setOnClickListener(this);
 
         buttonCreateEvent = (Button) view.findViewById(R.id.btn_Create_Event);
         buttonCreateEvent.setOnClickListener(this);
-
-        aSwitch = (Switch) view.findViewById(R.id.switch_Event);
 
         imgPictureEvent = (ImageView) view.findViewById(R.id.img_Picture_Event);
     }
@@ -200,7 +178,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM yyyy");
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM");
                         calendar.set(Calendar.DAY_OF_MONTH,day);
                         calendar.set(Calendar.MONTH,month);
                         calendar.set(Calendar.YEAR,year);
@@ -281,7 +259,6 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         editTextDateEvent.setText("");
         editTextTimeEvent.setText("");
         editTextDescriptionEvent.setText("");
-        editTextQuantity.setText("");
         imgPictureEvent.setImageResource(R.drawable.ic_photo_black_24dp);
         imgEventUri= null;
     }
@@ -297,16 +274,9 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     public void setEvent(String uidGroup,String linkPicture)
     {
         Event event = new Event();
-        if(editTextQuantity.getText().toString().equals(""))
-        {
             event = new Event(UUID.randomUUID().toString(),editTextNameEvent.getText().toString(),editTextPlaceEvent.getText().toString()
                     ,editTextDateEvent.getText().toString(),editTextTimeEvent.getText().toString(),linkPicture,editTextDescriptionEvent.getText().toString());
 
-        }else {
-            event =  new Event(UUID.randomUUID().toString(),editTextNameEvent.getText().toString(),editTextPlaceEvent.getText().toString()
-                    ,editTextDateEvent.getText().toString(),editTextTimeEvent.getText().toString(),linkPicture,editTextQuantity.getText().toString(),editTextDescriptionEvent.getText().toString());
-
-        }
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference();
         mDatabaseReference.child("groups").child(uidGroup).child("events").child(event.getEventUID()).setValue(event);

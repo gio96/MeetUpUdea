@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="pic" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="fragNav" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
@@ -20,10 +20,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/CreateEventFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/CreateEventFragment.java" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/Event.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/Event.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/EventsNavFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/EventsNavFragment.java" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowEventActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowEventActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowGroupEventsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowGroupEventsFragment.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowGroupActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowGroupActivity.java" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_show_event.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_show_event.xml" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_show_group.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_show_group.xml" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_event.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_event.xml" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_events_nav.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_events_nav.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,34 +51,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="activity_show_event.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_show_event.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="96" column="43" lean-forward="false" selection-start-line="96" selection-start-column="29" selection-end-line="96" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShowEventActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowEventActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="55" column="110" lean-forward="false" selection-start-line="55" selection-start-column="110" selection-end-line="55" selection-end-column="110" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ShowGroupEventsFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowGroupEventsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="82" column="58" lean-forward="false" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="58" />
+            <state relative-caret-position="1544">
+              <caret line="139" column="1" lean-forward="false" selection-start-line="139" selection-start-column="1" selection-end-line="139" selection-end-column="1" />
+              <folding>
+                <element signature="e#2265#2287#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CreateEventFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/CreateEventFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="52" column="82" lean-forward="true" selection-start-line="52" selection-start-column="82" selection-end-line="52" selection-end-column="82" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_create_event.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_create_event.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="179">
+              <caret line="63" column="8" lean-forward="false" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -91,7 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>interpolator</find>
       <find>log.d</find>
       <find>btn_Add_Picture</find>
       <find>textTitleGroup</find>
@@ -112,12 +118,16 @@
       <find>textView6</find>
       <find>cardViewEvent1</find>
       <find>Home</find>
-      <find>second</find>
       <find>crear</find>
       <find>view</find>
-      <find>uidGroup</find>
       <find>setTitle</find>
       <find>setPicture</find>
+      <find>second</find>
+      <find>openInformation</find>
+      <find>uidGroup</find>
+      <find>ShowGroupEventsFragment</find>
+      <find>aSwitch</find>
+      <find>quantity</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2175,30 +2185,32 @@
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_photo_black_24dp.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_create_group.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_event.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_icons8_calendar.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_event_view_group.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_event_tab_group_event.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_event_note_black_24dp.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_access_time_black_24dp.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/CreateEventFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_show_group_events.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_event_tab.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/HomeNavFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_show_group.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowGroupActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_show_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_show_event2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowGroupEventsFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_show_event.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/Event.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_show_event.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowGroupActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_show_group.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_events_nav.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowEventActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/EventsNavFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_event.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/CreateEventFragment.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="384" />
     <option name="y" value="8" />
     <option name="width" value="652" />
@@ -2220,9 +2232,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2238,14 +2248,21 @@
             <path>
               <item name="MeetUpUdea" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="meetupudea" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="MeetUpUdea" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="ProjectPane" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2583,7 +2600,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="384" y="8" width="1368" height="743" extended-state="6" />
+    <frame x="384" y="8" width="1368" height="743" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2663,20 +2681,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/Group.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/MeetUpNavFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -2695,7 +2699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="47" lean-forward="true" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2711,7 +2714,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="30" lean-forward="true" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2719,19 +2721,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_event.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="42" lean-forward="true" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
@@ -2751,124 +2741,72 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="22" column="39" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home_nav.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowActivityActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_show_activity.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_user_nav.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="79" column="35" lean-forward="false" selection-start-line="79" selection-start-column="29" selection-end-line="79" selection-end-column="35" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_events_nav.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_show_group_events.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_group.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="44" column="4" lean-forward="false" selection-start-line="44" selection-start-column="4" selection-end-line="55" selection-end-column="37" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_event_tab.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="46" column="12" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_keyboard_arrow_down_black_24dp.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_create_group_elements.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="8" lean-forward="false" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_create_group.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-287">
           <caret line="50" column="4" lean-forward="false" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_create_event.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="94" column="12" lean-forward="false" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_place_black_24dp.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2876,7 +2814,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2884,7 +2821,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2900,7 +2836,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2908,7 +2843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2916,7 +2850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2924,7 +2857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="35" lean-forward="true" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2932,7 +2864,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2940,7 +2871,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2948,7 +2878,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2956,7 +2885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2964,7 +2892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2972,7 +2899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2980,97 +2906,163 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="34" lean-forward="false" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_show_event2.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_show_event2.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/CreateGroupActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="44" lean-forward="true" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
-          <folding />
+        <state relative-caret-position="224">
+          <caret line="158" column="12" lean-forward="false" selection-start-line="158" selection-start-column="12" selection-end-line="158" selection-end-column="102" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_event.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/HomeNavFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="69" column="84" lean-forward="false" selection-start-line="69" selection-start-column="84" selection-end-line="69" selection-end-column="84" />
+        <state relative-caret-position="435">
+          <caret line="29" column="42" lean-forward="false" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_show_group.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="63" column="45" lean-forward="false" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_event_tab.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_show_event.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="96" column="43" lean-forward="false" selection-start-line="96" selection-start-column="29" selection-end-line="96" selection-end-column="43" />
+        <state relative-caret-position="404">
+          <caret line="46" column="12" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="64" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/Event.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="35" lean-forward="false" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+        <state relative-caret-position="375">
+          <caret line="34" column="31" lean-forward="false" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
           <folding>
+            <element signature="e#721#722#0" expanded="false" />
             <element signature="e#761#762#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/CreateGroupActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="158" column="12" lean-forward="false" selection-start-line="158" selection-start-column="12" selection-end-line="158" selection-end-column="102" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowGroupActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="57" column="4" lean-forward="false" selection-start-line="57" selection-start-column="4" selection-end-line="58" selection-end-column="47" />
+        <state relative-caret-position="150">
+          <caret line="49" column="26" lean-forward="false" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/CreateEventFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_show_event.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1701">
-          <caret line="286" column="5" lean-forward="true" selection-start-line="286" selection-start-column="5" selection-end-line="286" selection-end-column="5" />
+        <state relative-caret-position="239">
+          <caret line="48" column="39" lean-forward="false" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_show_group.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-61">
+          <caret line="52" column="50" lean-forward="false" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_events_nav.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_show_group_events.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="11" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/HomeNavFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="69" column="84" lean-forward="false" selection-start-line="69" selection-start-column="84" selection-end-line="69" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/CreateGroupElementsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-31">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_create_event.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="63" column="8" lean-forward="false" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/EventsNavFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="51" column="129" lean-forward="false" selection-start-line="51" selection-start-column="129" selection-end-line="51" selection-end-column="129" />
+          <folding>
+            <element signature="e#2320#2360#0" expanded="false" />
+            <element signature="e#3091#4315#0" expanded="false" />
+            <element signature="e#4314#4315#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowEventActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="55" column="48" lean-forward="false" selection-start-line="55" selection-start-column="48" selection-end-line="55" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowGroupEventsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="82" column="58" lean-forward="false" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="58" />
-          <folding />
+        <state relative-caret-position="1544">
+          <caret line="139" column="1" lean-forward="false" selection-start-line="139" selection-start-column="1" selection-end-line="139" selection-end-column="1" />
+          <folding>
+            <element signature="e#2265#2287#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/ShowEventActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/galonsogomez/meetupudea/CreateEventFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="55" column="110" lean-forward="false" selection-start-line="55" selection-start-column="110" selection-end-line="55" selection-end-column="110" />
+        <state relative-caret-position="120">
+          <caret line="52" column="82" lean-forward="true" selection-start-line="52" selection-start-column="82" selection-end-line="52" selection-end-column="82" />
           <folding />
         </state>
       </provider>

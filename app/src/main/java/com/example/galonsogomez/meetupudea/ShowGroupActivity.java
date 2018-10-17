@@ -45,15 +45,9 @@ public class ShowGroupActivity extends AppCompatActivity {
     private TextView textTitleGroup;
     private FloatingActionButton floatingActionButton;
 
-    private LinearLayout desple;
-    //private ConstraintLayout first;
-    private LinearLayout second;
-
     private String uidGroup;
     boolean following = false;
     boolean isOwn = false;
-
-    boolean openInformation = true;
 
     // Firebase
     private FirebaseDatabase mFirebaseDatabase;
@@ -71,11 +65,6 @@ public class ShowGroupActivity extends AppCompatActivity {
         //Send data to fragments
         showGroupInforFragment.setArguments(b);
         showGroupEventsFragment.setArguments(b);
-
-
-        desple = (LinearLayout) findViewById(R.id.desplegable);
-        //first = (ConstraintLayout) findViewById(R.id.firstLayout);
-        second = (LinearLayout) findViewById(R.id.secondLayout);
 
         //Set Data
         setTitle(b.getString("title"));
@@ -184,33 +173,6 @@ public class ShowGroupActivity extends AppCompatActivity {
         });
         createTabs();
 
-    }
-
-    //Information Dropdown
-    public void onClick(View v){
-        switch(v.getId()){
-            case R.id.in:
-                if(openInformation)
-                {
-
-                    desple.setVisibility(View.VISIBLE);
-                    /*TranslateAnimation animate = new TranslateAnimation(0,0,0,desple.getHeight());
-                    animate.setDuration(300);
-                    animate.setFillAfter(true);
-                    desple.startAnimation(animate);*/
-
-
-                    ((LinearLayout.LayoutParams) second.getLayoutParams()).weight = 3f;
-                    openInformation = false;
-                }else {
-
-                    desple.setVisibility(View.GONE);
-                    ((LinearLayout.LayoutParams) second.getLayoutParams()).weight = 1f;
-                    openInformation = true;
-                }
-
-                break;
-        }
     }
 
     public void esMio(String groupUiD){

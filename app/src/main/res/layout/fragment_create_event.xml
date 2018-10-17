@@ -116,7 +116,7 @@
             android:src="@drawable/ic_photo_black_24dp" />
 
 
-        <EditText
+        <!--<EditText
             android:id="@+id/text_Quantity_Event"
             android:layout_width="94dp"
             android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/btn_Date_Event"
             android:layout_marginBottom="155dp"
-            android:text="NO/SI"/>
+            android:text="NO/SI"/>-->
 
         <!--<DatePicker
             android:layout_width="wrap_content"

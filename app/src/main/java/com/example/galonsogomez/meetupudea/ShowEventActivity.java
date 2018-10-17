@@ -19,7 +19,7 @@ public class ShowEventActivity extends AppCompatActivity {
 
     TextView eventTitle,eventPlace,eventHour,eventDate,eventDescription;
     ImageView eventPicture;
-    String idEvent = "";
+    Bundle bundle;
     // Firebase
     private FirebaseDatabase mFirebaseDatabase;
     @Override
@@ -28,10 +28,9 @@ public class ShowEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_event);
 
         //data sent from ShowGroupEventsFragment
-        Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
 
         //Set Data
-        idEvent= bundle.getString("uidEvent");
         setDataEvent(bundle);
         setPictureEvent(bundle.getString("pictureEvent"));
         //Log.d("pic",bundle.getString("pictureEvent"));
@@ -41,19 +40,21 @@ public class ShowEventActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_Show_Event:
-                setAssist(idEvent);
+                setAssist(bundle);
                 Toast.makeText(getApplicationContext(),"Agregado",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
 
-    public void setAssist(String uidEvent)
+    public void setAssist(Bundle b)
     {
-        Event event = new Event(uidEvent);
+        Event event = new Event(b.getString("uidEvent"),b.getString("titleEvent"),b.getString("placeEvent"),b.getString("dateEvent")
+                ,b.getString("HourEvent"),b.getString("pictureEvent"),b.getString("descriptionEvent"));
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference();
-        mDatabaseReference.child("users").child(firebaseUser.getUid()).child("assist").push().setValue(event);
+        mDatabaseReference.child("users").child(firebaseUser.getUid()).child("attend").child(b.getString("uidEvent")).setValue(event);
+
     }
 
     public void setDataEvent(Bundle b){

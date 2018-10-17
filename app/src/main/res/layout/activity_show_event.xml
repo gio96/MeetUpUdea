@@ -46,9 +46,11 @@
                 android:id="@+id/text_Title_Show_Event"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Los estudiantes de la U marchan por la educacion publica"
+                android:gravity="center"
+                android:text="Los estudiantes"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAllCaps="true"/>
 
         </LinearLayout>
     </RelativeLayout>
