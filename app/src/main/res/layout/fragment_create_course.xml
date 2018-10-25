@@ -3,7 +3,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateCourseFragment"
-    android:background="#12ecd2">
+    android:background="@color/cardview_light_background"
+    tools:context=".CreateCourseFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/text_Name_Course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/text_Date_Event"
+            android:ems="10"
+            android:hint="@string/hint_createCourse_title"
+            android:inputType="textCapWords" />
+
+        <EditText
+            android:id="@+id/text_Place_Course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/text_Date_Event"
+            android:layout_marginTop="61dp"
+            android:drawableRight="@drawable/ic_place_black_24dp"
+            android:ems="10"
+            android:hint="@string/hint_createCourse_place"
+            android:inputType="textCapWords" />
+
+        <EditText
+            android:id="@+id/text_Schedule_Course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/text_Place_Course"
+            android:layout_marginTop="115dp"
+            android:drawableEnd="@drawable/ic_access_time_black_24dp"
+            android:ems="10"
+            android:hint="@string/hint_createCourse_schedule" />
+
+
+        <EditText
+            android:id="@+id/text_Description_Course"
+            android:layout_width="375dp"
+            android:layout_height="86dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/text_Schedule_Course"
+            android:ems="10"
+            android:hint="@string/hint_createCourse_description"
+            android:inputType="textMultiLine|textCapSentences"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="66dp" />
+
+
+        <Button
+            android:id="@+id/btn_Create_Course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_button"
+            android:text="@string/button_Create" />
+
+        <Button
+            android:id="@+id/btn_Add_Picture_Course"
+            android:layout_width="57dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/img_Picture_Course"
+            android:layout_marginBottom="18dp"
+            android:layout_toEndOf="@+id/text_Place_Course"
+            android:drawableRight="@android:drawable/ic_menu_camera"
+            android:elevation="10dp" />
+
+        <ImageView
+            android:id="@+id/img_Picture_Course"
+            android:layout_width="92dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/text_Description_Course"
+            android:layout_marginTop="45dp"
+            android:layout_toStartOf="@+id/btn_Create_Course"
+            android:src="@drawable/ic_photo_black_24dp" />
+
+
+    </RelativeLayout>
 
 </FrameLayout>

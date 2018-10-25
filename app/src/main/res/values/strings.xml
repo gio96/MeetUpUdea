@@ -18,4 +18,12 @@
     <string name="button_CreateGroup">+ Grupo</string>
     <string name="title_activity_create_group_elements">CreateGroupElementsActivity</string>
 
+
+    // Create course
+    <string name="hint_createCourse_title">Nombre</string>
+    <string name="hint_createCourse_place">Lugar</string>
+    <string name="hint_createCourse_schedule">Horario  Ej: Lunes a viernes 6-8 am</string>
+    <string name="hint_createCourse_description">De que trata el curso?</string>
+
+
 </resources>

@@ -17,8 +17,7 @@
             android:layout_alignStart="@+id/text_Date_Event"
             android:ems="10"
             android:hint="Nombre"
-            android:inputType="textCapWords"
-            />
+            android:inputType="textCapWords" />
 
         <EditText
             android:id="@+id/text_Place_Event"

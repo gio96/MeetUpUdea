@@ -17,6 +17,7 @@
             android:background="#cccccc">
 
             <com.github.florent37.diagonallayout.DiagonalLayout
+                android:id="@+id/diagonalLayout"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:elevation="0dp"
@@ -42,7 +43,6 @@
                     android:textSize="25sp" />
 
             </com.github.florent37.diagonallayout.DiagonalLayout>
-
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/avatar"
                 android:layout_width="100dp"
