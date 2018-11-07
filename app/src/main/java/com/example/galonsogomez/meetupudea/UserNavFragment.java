@@ -79,36 +79,6 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
         setData(view,firebaseUser);
         setPicture(view,getActivity().getApplicationContext(),firebaseUser);
 
-        // here
-        mReference = mFirebaseDatabase.getReference().child("groups");
-
-
-        // Search in myGroups the id of the group to show
-
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mReferenceMyGroups = mFirebaseDatabase.getReference().child("users")
-                .child(firebaseUser.getUid()).child("myGroups");
-
-
-        mReferenceMyGroups.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Group group = new Group();
-
-                // Go through each value of list myGroups
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    String myGroupUid = ds.getValue().toString();
-                    Log.d("MyGroups", myGroupUid);
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
         return view;
