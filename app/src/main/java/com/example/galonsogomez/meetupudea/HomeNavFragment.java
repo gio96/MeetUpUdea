@@ -118,14 +118,6 @@ public class HomeNavFragment extends Fragment {
         }
     }
 
-    /* public void signOut(){
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseAuth.getInstance().signOut();
-
-        Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
-        startActivity(intent);
-    }*/
-
     public Bundle sendData(Group group){
         Bundle bundle = new Bundle();
         bundle.putString("UID",group.getGroupUID());

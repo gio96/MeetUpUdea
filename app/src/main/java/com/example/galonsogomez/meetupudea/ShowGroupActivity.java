@@ -48,6 +48,7 @@ public class ShowGroupActivity extends AppCompatActivity {
     private String uidGroup;
     boolean following = false;
     boolean isOwn = false;
+    Bundle bundle = new Bundle();
 
     // Firebase
     private FirebaseDatabase mFirebaseDatabase;
@@ -59,22 +60,21 @@ public class ShowGroupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_group);
 
         //Get data from each group from HomeNavFragment
-        Bundle b = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         ShowGroupInforFragment showGroupInforFragment = new ShowGroupInforFragment();
         ShowGroupEventsFragment showGroupEventsFragment = new ShowGroupEventsFragment();
         //Send data to fragments
-        showGroupInforFragment.setArguments(b);
-        showGroupEventsFragment.setArguments(b);
+        showGroupInforFragment.setArguments(bundle);
+        showGroupEventsFragment.setArguments(bundle);
 
         //Set Data
-        setTitle(b.getString("title"));
-        setPicture(b.getString("picture"),getApplicationContext());
+        setTitle(bundle.getString("title"));
+        setPicture(bundle.getString("picture"),getApplicationContext());
         //Set uidGroup from Bundle
-        uidGroup = b.getString("UID");
+        uidGroup = bundle.getString("UID");
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        final OvershootInterpolator interpolator = new OvershootInterpolator();
 
-        esMio(uidGroup);
+        isMyGroup(uidGroup);
 
         if(!isOwn){
 
@@ -165,7 +165,7 @@ public class ShowGroupActivity extends AppCompatActivity {
                                 .setAction("Action",null).show();
                         floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
                                 R.drawable.heart));
-                        setFollowing(uidGroup);
+                        setFollowing(bundle);
                     }
 
                 }
@@ -175,13 +175,12 @@ public class ShowGroupActivity extends AppCompatActivity {
 
     }
 
-    public void esMio(String groupUiD){
+    public void isMyGroup(String groupUiD){
 
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         //DatabaseReference mDatabaseReferenceFollowing = mFirebaseDatabase.getReference().child("users").child(firebaseUser.getUid()).child("following");
-
 
         DatabaseReference mDatabaseReferenceGroup = mFirebaseDatabase.getReference().child("groups").child(groupUiD);
 
@@ -193,10 +192,8 @@ public class ShowGroupActivity extends AppCompatActivity {
                     Log.d("mani","el grupo es mio");
                     floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
                             R.drawable.ic_add_black_24dp));
-
                     //The group is mine
                     isOwn = true;
-
                 }else {
                     Log.d("mani","el grupo NO es mio");
                     isOwn = false;
@@ -209,15 +206,17 @@ public class ShowGroupActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void setFollowing(String uidGroup)
+//esteeeeee es el que hay que corregir
+    public void setFollowing(Bundle groupData)
     {
-        Group group = new Group(uidGroup);
+        String idGroup = groupData.getString("UID");
+        Group group = new Group(idGroup,groupData.getString("title"),groupData.getString("picture"),groupData.getString("description"));
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         //User user = new  User(firebaseUser.getUid());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference();
-        mDatabaseReference.child("users").child(firebaseUser.getUid()).child("following").push().setValue(group);
+        //mDatabaseReference.child("users").child(firebaseUser.getUid()).child("following").push().setValue(group);
+        mDatabaseReference.child("users").child(firebaseUser.getUid()).child("following").child(uidGroup).setValue(group);
     }
 
     public void setTitle(String title){

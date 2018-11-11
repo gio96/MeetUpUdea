@@ -25,6 +25,13 @@ public class Group {
         this.description = description;
     }
 
+    public Group(String groupUID, String title, String picture, String description) {
+        this.groupUID = groupUID;
+        this.title = title;
+        this.picture = picture;
+        this.description = description;
+    }
+
     public Group(String groupUID) {
         this.groupUID = groupUID;
     }

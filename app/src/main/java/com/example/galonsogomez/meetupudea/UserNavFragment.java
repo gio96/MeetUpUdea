@@ -79,8 +79,6 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
         setData(view,firebaseUser);
         setPicture(view,getActivity().getApplicationContext(),firebaseUser);
 
-
-
         return view;
     }
 

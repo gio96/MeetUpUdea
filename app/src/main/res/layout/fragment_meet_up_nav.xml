@@ -4,6 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MeetUpNavFragment"
-    android:background="#f7bc0b">
+    android:padding="8dp">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerV_Group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>

@@ -80,7 +80,7 @@ public class EventsNavFragment extends Fragment {
                                 //Toast.makeText(view.getContext(),model.getTime(), Toast.LENGTH_SHORT).show();
 
                                 //Send data to ShowEventActivity
-                                /*Bundle bundle = new Bundle();
+                                Bundle bundle = new Bundle();
                                 bundle.putString("uidEvent",model.getEventUID());
                                 bundle.putString("titleEvent",model.getTitle());
                                 bundle.putString("pictureEvent",model.getPicture());
@@ -91,7 +91,7 @@ public class EventsNavFragment extends Fragment {
 
                                 Intent intent = new Intent(getActivity(),ShowEventActivity.class);
                                 intent.putExtras(bundle);
-                                startActivity(intent);*/
+                                startActivity(intent);
 
                             }
                         });

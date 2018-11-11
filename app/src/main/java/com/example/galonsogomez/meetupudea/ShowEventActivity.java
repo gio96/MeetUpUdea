@@ -40,13 +40,13 @@ public class ShowEventActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_Show_Event:
-                setAssist(bundle);
+                setAttend(bundle);
                 Toast.makeText(getApplicationContext(),"Agregado",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
 
-    public void setAssist(Bundle b)
+    public void setAttend(Bundle b)
     {
         Event event = new Event(b.getString("uidEvent"),b.getString("titleEvent"),b.getString("placeEvent"),b.getString("dateEvent")
                 ,b.getString("HourEvent"),b.getString("pictureEvent"),b.getString("descriptionEvent"));
