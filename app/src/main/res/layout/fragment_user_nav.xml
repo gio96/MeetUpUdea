@@ -90,12 +90,31 @@
             android:padding="8dp"
             android:orientation="horizontal">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_View_Fragment_User"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            </android.support.v7.widget.RecyclerView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_GruposCreados"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Creados"
+                        android:textStyle="bold"
+                        android:typeface="monospace" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_View_Fragment_User"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
 

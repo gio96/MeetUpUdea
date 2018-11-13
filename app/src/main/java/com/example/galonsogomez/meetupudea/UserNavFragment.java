@@ -43,13 +43,15 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
     private Button btnLogOut;
     private Button btnCreate;
     de.hdodenhof.circleimageview.CircleImageView circleImageView;
-    private RecyclerView recyclerViewUser;
+
+    //recyclerV_Events_Nav
+
+    private RecyclerView recyclerVUsermyGroups;
 
     //Firebase
     private DatabaseReference mReferenceMyGroups;
     private DatabaseReference mReference;
     private FirebaseDatabase mFirebaseDatabase;
-
 
     public UserNavFragment() {
         // Required empty public constructor
@@ -62,12 +64,20 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_nav, container, false);
+         //MyGroups
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        recyclerViewUser = (RecyclerView) view.findViewById(R.id.recycler_View_Fragment_User);
-        recyclerViewUser.setHasFixedSize(true);
+        Query myGroupsQuery = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(firebaseUser.getUid()).child("myGroups");
+        Log.d("query", myGroupsQuery.toString());
+        recyclerVUsermyGroups = (RecyclerView) view.findViewById(R.id.recycler_View_Fragment_User);
+        mReference = myGroupsQuery.getRef();
+        mReference.keepSynced(true);
 
-        //this change to getActivity() /problem
-        recyclerViewUser.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        recyclerVUsermyGroups.setHasFixedSize(true);
+        recyclerVUsermyGroups.setLayoutManager(new GridLayoutManager(getActivity(),2));
+
+
 
         btnLogOut = view.findViewById(R.id.btn_Logout);
         btnLogOut.setOnClickListener(this);
@@ -75,11 +85,46 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
         btnCreate.setOnClickListener(this);
 
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         setData(view,firebaseUser);
         setPicture(view,getActivity().getApplicationContext(),firebaseUser);
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        //Create firebaseRecyclerAdapter with a viewHolder to show the info of the
+        // Database
+
+        FirebaseRecyclerAdapter<Group,HomeNavFragment.GroupViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Group,HomeNavFragment.GroupViewHolder>
+                        (Group.class,R.layout.item_group,HomeNavFragment.GroupViewHolder.class,mReference) {
+
+                    @Override
+                    public  void populateViewHolder(HomeNavFragment.GroupViewHolder groupViewHolder,
+                                                    final Group model , int position){
+
+                        // To assign the info from Database to cardView
+                        //groupViewHolder.setIdGroup(model.getGroupUID());
+                        Log.d("model", model.getTitle());
+                        groupViewHolder.setTitle(model.getTitle());
+                        groupViewHolder.setIcon();
+                        groupViewHolder.setPicture(model.getPicture(),getActivity().getApplicationContext());
+                        groupViewHolder.cardViewEvent1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                //Show info of the group to edit
+                            }
+                        });
+
+                    }
+                };
+
+        recyclerVUsermyGroups.setAdapter(firebaseRecyclerAdapter);
     }
 
     public void signOut(){

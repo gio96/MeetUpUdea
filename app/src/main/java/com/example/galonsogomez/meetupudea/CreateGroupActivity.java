@@ -144,11 +144,12 @@ public class CreateGroupActivity extends AppCompatActivity {
                             // Add child
                             mDatabaseReference.child(group.getGroupUID()).setValue(group);
                             Toast.makeText(getApplicationContext(), "Grupo creado", Toast.LENGTH_SHORT).show();
-
+                            //
+                            // Add child to myGroups
                             mDatabaseReference = FirebaseDatabase.getInstance().getReference();
                             mDatabaseReference.child("users").child(firebaseUser.getUid()).child("myGroups")
-                                    .push()
-                                    .setValue(group.getGroupUID());
+                                    .child(group.getGroupUID())
+                                    .setValue(group);
 
                             cleanFields();
                             Log.d("createGroup", linkPicture);

@@ -48,9 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="#8c000000"
+        android:elevation="10dp"
         android:padding="1dp"
         android:text="Group Title"
-        android:elevation="10dp"
         android:textColor="#ffe3e3e3"
         android:textSize="12sp"
         android:textStyle="normal" />

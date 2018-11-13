@@ -25,5 +25,8 @@
     <string name="hint_createCourse_schedule">Horario  Ej: Lunes a viernes 6-8 am</string>
     <string name="hint_createCourse_description">De que trata el curso?</string>
 
+    // View Profile
+    <string name="Creados">CREADOS</string>
+
 
 </resources>

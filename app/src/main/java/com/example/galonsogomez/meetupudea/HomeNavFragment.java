@@ -108,6 +108,11 @@ public class HomeNavFragment extends Fragment {
             groupTitle.setText(title);
 
         }
+        public void setIcon(){
+            groupTitle = itemView.findViewById(R.id.text_Group);
+            groupTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_edit_black_24dp, 0);
+
+        }
 
         public void setPicture(String picture, Context c) {
             groupPicture = (ImageView) itemView.findViewById(R.id.img_Group);
