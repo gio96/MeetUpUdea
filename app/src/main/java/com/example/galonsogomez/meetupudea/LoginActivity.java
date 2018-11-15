@@ -141,6 +141,8 @@ public class LoginActivity extends AppCompatActivity{
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("", "Google sign in failed", e);
+                loginButton.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         }
     }

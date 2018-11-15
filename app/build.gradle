@@ -43,6 +43,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //Libreria para cortar las imagenes
     implementation 'com.github.florent37:diagonallayout:1.0.9'
+    implementation 'com.github.florent37:arclayout:1.0.2'
 
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {

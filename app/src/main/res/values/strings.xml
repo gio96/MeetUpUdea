@@ -28,5 +28,8 @@
     // View Profile
     <string name="Creados">CREADOS</string>
 
+    //Fragment meetup
+    <string name="text_message_meetup">Aún no sigues a ningún grupo</string>
+
 
 </resources>

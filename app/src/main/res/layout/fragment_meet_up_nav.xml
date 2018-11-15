@@ -6,6 +6,15 @@
     tools:context=".MeetUpNavFragment"
     android:padding="8dp">
 
+    <TextView
+        android:id="@+id/text_Message_MeetUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_message_meetup"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerV_Group"
         android:layout_width="match_parent"
