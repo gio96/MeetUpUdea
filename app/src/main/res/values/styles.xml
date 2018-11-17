@@ -17,4 +17,12 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="dividerHorizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#000000</item>
+        <item name="android:dividerPadding">5dp</item>
+        <item name="android:showDividers">end</item>
+    </style>
+
 </resources>
