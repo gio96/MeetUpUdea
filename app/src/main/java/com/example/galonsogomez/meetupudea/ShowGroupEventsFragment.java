@@ -6,16 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -71,12 +68,12 @@ public class ShowGroupEventsFragment extends Fragment {
 
                         // To assign the info from Database to cardView
                         //groupViewHolder.setIdGroup(model.getGroupUID());
-                        groupViewHolder.setData(model.getTitle(),model.getPlace(),model.getTime(),model.getDate());
+                        groupViewHolder.setData(model.getTitle(),model.getPlace(),model.getStarHour(),model.getDate());
                         groupViewHolder.setPicture(model.getPicture(),getActivity().getApplicationContext());
                         groupViewHolder.cardViewEvent1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                //Toast.makeText(view.getContext(),model.getTime(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(view.getContext(),model.getStarHour(), Toast.LENGTH_SHORT).show();
 
                                 //Send data to ShowEventActivity
                                Bundle bundle = new Bundle();
@@ -86,7 +83,8 @@ public class ShowGroupEventsFragment extends Fragment {
                                 bundle.putString("descriptionEvent",model.getDescription());
                                 bundle.putString("dateEvent", model.getDate());
                                 bundle.putString("placeEvent", model.getPlace());
-                                bundle.putString("HourEvent", model.getTime());
+                                bundle.putString("startHourEvent", model.getStarHour());
+                                bundle.putString("finishHourEvent", model.getFinishHour());
 
                                 Intent intent = new Intent(getActivity(),ShowEventActivity.class);
                                 intent.putExtras(bundle);

@@ -4,25 +4,19 @@ import android.content.ContentResolver;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -30,8 +24,6 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -40,8 +32,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
-import java.util.SimpleTimeZone;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
@@ -52,10 +42,10 @@ import static android.app.Activity.RESULT_OK;
  */
 public class CreateEventFragment extends Fragment implements View.OnClickListener{
 
-    private Button buttonDate,buttonTime;
+    private Button buttonDate, buttonStartHour,buttonFinishHour;
     private int dia,mes,año,hora,minutos;
 
-    private  EditText editTextNameEvent,editTextPlaceEvent,editTextDateEvent,editTextTimeEvent,editTextDescriptionEvent;
+    private  EditText editTextNameEvent,editTextPlaceEvent,editTextDateEvent, editTextStartHour,editTextFinishHour,editTextDescriptionEvent;
     private Button buttonAddImage,buttonCreateEvent;
 
     private ImageView imgPictureEvent;
@@ -106,8 +96,8 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
         //CHECK ASSISTANT FIELD
         if(editTextNameEvent.getText().toString().equals("") || editTextPlaceEvent.getText().toString().equals("") ||
-                editTextDateEvent.getText().toString().equals("") || editTextTimeEvent.getText().toString().equals("") ||
-                editTextDescriptionEvent.getText().toString().equals(""))
+                editTextDateEvent.getText().toString().equals("") || editTextStartHour.getText().toString().equals("") ||
+                editTextDescriptionEvent.getText().toString().equals("") || editTextFinishHour.getText().toString().equals(""))
         {
 
             Toast.makeText(getActivity().getApplicationContext(),"Existen campos vacíos",Toast.LENGTH_SHORT).show();
@@ -121,13 +111,17 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         buttonDate = (Button) view.findViewById(R.id.btn_Date_Event);
         buttonDate.setOnClickListener(this);
 
-        buttonTime = (Button) view.findViewById(R.id.btn_Time_Event);
-        buttonTime.setOnClickListener(this);
+        buttonStartHour = (Button) view.findViewById(R.id.btn_Start_Hour_Event);
+        buttonStartHour.setOnClickListener(this);
+
+        buttonFinishHour = (Button) view.findViewById(R.id.btn_Finish_Hour_Event);
+        buttonFinishHour.setOnClickListener(this);
 
         editTextNameEvent = (EditText) view.findViewById(R.id.text_Name_Event);
         editTextPlaceEvent = (EditText) view.findViewById(R.id.text_Place_Event);
         editTextDateEvent = (EditText) view.findViewById(R.id.text_Date_Event);
-        editTextTimeEvent = (EditText) view.findViewById(R.id.text_Time_Event);
+        editTextStartHour = (EditText) view.findViewById(R.id.text_Start_Hour_Event);
+        editTextFinishHour = (EditText) view.findViewById(R.id.text_Finish_Hour_Event);
         editTextDescriptionEvent = (EditText) view.findViewById(R.id.text_Description_Event);
 
         buttonAddImage = (Button) view.findViewById(R.id.btn_Add_Picture_Event);
@@ -182,7 +176,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                         calendar.set(Calendar.DAY_OF_MONTH,day);
                         calendar.set(Calendar.MONTH,month);
                         calendar.set(Calendar.YEAR,year);
-                        //Log.d("fechass",simpleDateFormat.format(calendar.getTime()));
+                        //Log.d("fechass",simpleDateFormat.format(calendar.getStarHour()));
                         editTextDateEvent.setText(simpleDateFormat.format(calendar.getTime()));
                     }
                 },dia,mes,año);
@@ -190,7 +184,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                 datePickerDialog.show();
                 break;
 
-            case R.id.btn_Time_Event:
+            case R.id.btn_Start_Hour_Event:
                 final Calendar cal = Calendar.getInstance();
                 hora = cal.get(Calendar.HOUR);
                 minutos = cal.get(Calendar.MINUTE);
@@ -201,10 +195,27 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm aa");
                         cal.set(Calendar.HOUR,hourOfDay);
                         cal.set(Calendar.MINUTE,minute);
-                        editTextTimeEvent.setText(simpleDateFormat.format(cal.getTime()));
+                        editTextStartHour.setText(simpleDateFormat.format(cal.getTime()));
                     }
                 },hora,minutos, false);
                 timePickerDialog.show();
+                break;
+
+            case R.id.btn_Finish_Hour_Event:
+                final Calendar cal2 = Calendar.getInstance();
+                hora = cal2.get(Calendar.HOUR);
+                minutos = cal2.get(Calendar.MINUTE);
+
+                TimePickerDialog timePickerDialog2 = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm aa");
+                        cal2.set(Calendar.HOUR,hourOfDay);
+                        cal2.set(Calendar.MINUTE,minute);
+                        editTextFinishHour.setText(simpleDateFormat.format(cal2.getTime()));
+                    }
+                },hora,minutos, false);
+                timePickerDialog2.show();
                 break;
         }
     }
@@ -257,7 +268,8 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         editTextNameEvent.setText("");
         editTextPlaceEvent.setText("");
         editTextDateEvent.setText("");
-        editTextTimeEvent.setText("");
+        editTextStartHour.setText("");
+        editTextFinishHour.setText("");
         editTextDescriptionEvent.setText("");
         imgPictureEvent.setImageResource(R.drawable.ic_photo_black_24dp);
         imgEventUri= null;
@@ -275,7 +287,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     {
         Event event = new Event();
             event = new Event(UUID.randomUUID().toString(),editTextNameEvent.getText().toString(),editTextPlaceEvent.getText().toString()
-                    ,editTextDateEvent.getText().toString(),editTextTimeEvent.getText().toString(),linkPicture,editTextDescriptionEvent.getText().toString());
+                    ,editTextDateEvent.getText().toString(), editTextStartHour.getText().toString(),editTextFinishHour.getText().toString(),linkPicture,editTextDescriptionEvent.getText().toString());
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference();

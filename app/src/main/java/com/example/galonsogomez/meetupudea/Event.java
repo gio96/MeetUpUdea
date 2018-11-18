@@ -6,19 +6,22 @@ public class Event {
     private String title;
     private String place;
     private String date;
-    private String time;
+    private String starHour;
+    private String finishHour;
     private String picture;
     private String quantity;
     private String description;
 
-    public Event(String eventUID, String title, String place, String date, String time, String picture, String quantity, String description) {
+
+
+    public Event(String eventUID, String title, String place, String date, String starHour,String finishHour, String picture, String description) {
         this.eventUID = eventUID;
         this.title = title;
         this.place = place;
         this.date = date;
-        this.time = time;
+        this.starHour = starHour;
         this.picture = picture;
-        this.quantity = quantity;
+        this.finishHour = finishHour;
         this.description = description;
     }
 
@@ -26,15 +29,16 @@ public class Event {
         this.eventUID = eventUID;
     }
 
-    public Event(String eventUID, String title, String place, String date, String time, String picture, String description) {
+    public Event(String eventUID, String title, String place, String date, String starHour, String picture, String description) {
         this.eventUID = eventUID;
         this.title = title;
         this.place = place;
         this.date = date;
-        this.time = time;
+        this.starHour = starHour;
         this.picture = picture;
         this.description = description;
     }
+
 
     public Event() {
 
@@ -72,12 +76,20 @@ public class Event {
         this.date = date;
     }
 
-    public String getTime() {
-        return time;
+    public String getStarHour() {
+        return starHour;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setStarHour(String starHour) {
+        this.starHour = starHour;
+    }
+
+    public String getFinishHour() {
+        return finishHour;
+    }
+
+    public void setFinishHour(String finishHour) {
+        this.finishHour = finishHour;
     }
 
     public String getPicture() {

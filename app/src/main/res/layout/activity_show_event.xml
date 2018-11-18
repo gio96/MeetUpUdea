@@ -6,35 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ShowEventActivity">
 
-    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/view">
+    <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_above="@+id/view">
 
-        <LinearLayout
-            android:id="@+id/LinearImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/linearDate">
-
-            <ImageView
-                android:id="@+id/img_Show_Event"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/linearDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-    </RelativeLayout>
+       <ImageView
+           android:id="@+id/img_Show_Event"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"/>
+    </LinearLayout>
 
     <View
         android:id="@+id/view"
@@ -83,7 +64,7 @@
                 />
 
             <TextView
-                android:id="@+id/text_Hour_Show_Event"
+                android:id="@+id/text_Start_Hour_Show_Event"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -108,6 +89,7 @@
                 android:layout_weight="1"/>
 
             <TextView
+                android:id="@+id/text_Finish_Date_Show_Event"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -115,6 +97,7 @@
                 android:drawableLeft="@drawable/ic_event_note_black_24dp" />
 
             <TextView
+                android:id="@+id/text_Finish_Hour_Show_Event"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -141,7 +124,7 @@
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mattis sed sapien non elementum. Nunc ut nulla a sem tincidunt condimentum viverra in tortor. Duis id ligula magna. Donec purus massa, tempus ut magna eget, pharetra cursus mi. Etiam quis est dapibus, pellentesque est vel, vulputate neque."
             />
 
-        <Button
+        <!--<Button
             android:id="@+id/btn_Show_Event"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -150,7 +133,28 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded_button"
             android:text="Asistir"
-            android:onClick="onClick"/>
+            android:onClick="onClick"/>-->
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton_Attend_Event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        app:backgroundTint="@color/colorGrey2"
+        android:src="@drawable/thumb_up_outline"
+        />
+
+    <!--<android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/third"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        app:backgroundTint="@color/colorGrey2"
+        app:srcCompat="@android:drawable/ic_delete" />-->
 
 </RelativeLayout>
