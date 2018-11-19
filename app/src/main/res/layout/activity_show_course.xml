@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShowCourseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/viewCourse">
+
+        <ImageView
+            android:id="@+id/img_Show_Course"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewCourse"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true" />
+
+    <LinearLayout
+        android:id="@+id/info_Course"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/viewCourse"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_Title_Show_Course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Los estudiantes"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_schedule_Show_Course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/text_Place_Show_Course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_place_black_24dp"
+            android:textSize="15dp" />
+
+        <View style="@style/dividerHorizontal" />
+
+        <TextView
+            android:id="@+id/text_Description_Show_Course"
+            android:layout_width="352dp"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mattis sed sapien non elementum. Nunc ut nulla a sem tincidunt condimentum viverra in tortor. Duis id ligula magna. Donec purus massa, tempus ut magna eget, pharetra cursus mi. Etiam quis est dapibus, pellentesque est vel, vulputate neque."
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

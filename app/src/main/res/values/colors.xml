@@ -6,5 +6,6 @@
     <color name="colorGrey">#efebe9</color>
     <color name="colorGrey2">#efebe9</color>
     <color name="darkGrayDivider">#c0c0c0</color>
+    <color name="black">#000000</color>
 
 </resources>

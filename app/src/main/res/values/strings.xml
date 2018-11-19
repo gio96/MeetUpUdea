@@ -26,7 +26,7 @@
     <string name="hint_createCourse_description">De que trata el curso?</string>
 
     // View Profile
-    <string name="Creados">CREADOS</string>
+    <string name="Creados">Revisa tus grupos!</string>
 
     //Fragment meetup
     <string name="text_message_meetup">Aún no sigues a ningún grupo</string>

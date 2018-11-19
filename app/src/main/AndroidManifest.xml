@@ -24,7 +24,8 @@
             android:label="@string/app_name" />
         <activity android:name=".CreateGroupActivity" />
         <activity android:name=".CreateGroupElementsActivity" />
-        <activity android:name=".ShowEventActivity"></activity>
+        <activity android:name=".ShowEventActivity" />
+        <activity android:name=".ShowCourseActivity"></activity>
     </application>
 
 </manifest>

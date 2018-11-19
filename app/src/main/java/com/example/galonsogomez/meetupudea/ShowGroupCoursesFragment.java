@@ -61,16 +61,38 @@ public class ShowGroupCoursesFragment extends Fragment {
         super.onStart();
         FirebaseRecyclerAdapter<Course, ShowGroupCoursesFragment.ItemViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<Course, ShowGroupCoursesFragment.ItemViewHolder>
-                        (Course.class, R.layout.item_course, ShowGroupCoursesFragment.ItemViewHolder.class, mreference) {
+                        (Course.class, R.layout.item_course_v2, ShowGroupCoursesFragment.ItemViewHolder.class, mreference) {
 
                     @Override
                     public void populateViewHolder(ShowGroupCoursesFragment.ItemViewHolder courseViewHolder, final Course model, int position) {
 
                         // To assign the info from Database to cardView
                         //groupViewHolder.setIdGroup(model.getGroupUID());
-                        courseViewHolder.setData(model.getTitle(), model.getPlace(), model.getSchedule(), model.getDescription());
+                        courseViewHolder.setData(model.getTitle(), model.getSchedule());
                         courseViewHolder.setPicture(model.getPicture(), getActivity().getApplicationContext());
                         Log.d("showcourses", model.getPicture());
+
+                        courseViewHolder.cardViewCourse.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+
+                                //Send data to ShowCourseActivity
+                                Bundle bundle = new Bundle();
+                                bundle.putString("uidCourse",model.getCourseUID());
+                                bundle.putString("titleCourse",model.getTitle());
+                                bundle.putString("pictureCourse",model.getPicture());
+                                bundle.putString("descriptionCourse",model.getDescription());
+                                bundle.putString("placeCourse", model.getPlace());
+                                bundle.putString("scheduleCourse", model.getSchedule());
+
+                                Intent intent = new Intent(getActivity(),ShowCourseActivity.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+
+                            }
+                        });
+
 
                     }
                 };
@@ -89,24 +111,25 @@ public class ShowGroupCoursesFragment extends Fragment {
         View mview;
         TextView courseTitle,coursePlace,courseSchedule,courseDescription;
         ImageView coursePicture;
-        //CardView cardViewEvent1 = (CardView) itemView.findViewById(R.id.cv_Item_Tab);
+        CardView cardViewCourse = (CardView) itemView.findViewById(R.id.cv_Item_Frag_Course);
         public  ItemViewHolder(View itemView){
             super(itemView);
             mview = itemView;
         }
 
-        public void setData(String title,String place,String schedule,String description){
+        public void setData(String title,String schedule){
             courseTitle = (TextView) itemView.findViewById(R.id.text_Title_Course_Tab);
             courseTitle.setText(title);
 
-            coursePlace = (TextView) itemView.findViewById(R.id.text_Place_Course_Tab);
-            coursePlace.setText(place);
+
 
             courseSchedule = (TextView) itemView.findViewById(R.id.text_Schedule_Course_Tab);
             courseSchedule.setText(schedule);
 
-            courseDescription = (TextView) itemView.findViewById(R.id.text_Description_Course_Tab);
+            /*courseDescription = (TextView) itemView.findViewById(R.id.text_Description_Course_Tab);
             courseDescription.setText(description);
+            coursePlace = (TextView) itemView.findViewById(R.id.text_Place_Course_Tab);
+            coursePlace.setText(place);*/
 
         }
 
