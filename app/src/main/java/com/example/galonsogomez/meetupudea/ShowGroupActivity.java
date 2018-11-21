@@ -304,6 +304,15 @@ public class ShowGroupActivity extends AppCompatActivity {
         mDatabaseReferenceGroup.removeValue();
 
 
+        // Delete from myGroups
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReferenceGroup = mFirebaseDatabase.getReference().child("users").child(firebaseUser.getUid())
+                .child("myGroups").child(uidGroup);
+        Log.d("cosita", mDatabaseReferenceGroup.toString());
+        mDatabaseReferenceGroup.removeValue();
+        //finish();
+        Log.d("borrar", "deleteGroup: borrado");
+        //Toast.makeText(getApplicationContext(), "Se eliminó", Toast.LENGTH_SHORT).show();
 
         // Delete from Following
 
@@ -312,11 +321,15 @@ public class ShowGroupActivity extends AppCompatActivity {
         mDatabaseReferenceGroup.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String uidUser = dataSnapshot.getValue(User.class).getUserUID();
-                DatabaseReference mDatabaseReferenceDelete = mFirebaseDatabase.getReference().child("users")
-                        .child(uidUser).child("following").child(uidGroup);
-                mDatabaseReferenceDelete.removeValue();
-
+               // String uidUser = dataSnapshot.getValue(User.class).getUserUID();
+                User user = new User();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    //user = ds.getValue(User.class);;
+                    Log.d("coso", ds.getKey());
+                    DatabaseReference mDatabaseReferenceDelete = mFirebaseDatabase.getReference().child("users")
+                            .child(ds.getKey()).child("following").child(uidGroup);
+                    mDatabaseReferenceDelete.removeValue();
+                }
             }
 
             @Override
@@ -324,14 +337,6 @@ public class ShowGroupActivity extends AppCompatActivity {
                 Log.d("mani", "No hay ningun datos");
             }
         });
-        // Delete from myGroups
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReferenceGroup = mFirebaseDatabase.getReference().child("users").child(firebaseUser.getUid())
-                .child("myGroups").child(uidGroup);
-        mDatabaseReferenceGroup.removeValue();
-        finish();
-        Log.d("borrar", "deleteGroup: borrado");
-        //Toast.makeText(getApplicationContext(), "Se eliminó", Toast.LENGTH_SHORT).show();
 
 
     }
@@ -346,11 +351,10 @@ public class ShowGroupActivity extends AppCompatActivity {
 
                             public void onClick(DialogInterface dialog, int id) {
 
-
+                                deleteGroup();
                                Intent intent = new Intent(ShowGroupActivity.this, BottomNavActivity.class);
                                 startActivity(intent);
                                 dialog.cancel();
-                                deleteGroup();
 
                             }
                         })
