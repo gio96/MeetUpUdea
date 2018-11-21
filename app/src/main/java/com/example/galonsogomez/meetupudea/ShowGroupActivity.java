@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.storage.StorageManager;
@@ -16,15 +17,19 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,6 +51,8 @@ public class ShowGroupActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButton;
 
     private String uidGroup;
+    private String titleGroup;
+
     boolean following = false;
     boolean isOwn = false;
     Bundle bundle = new Bundle();
@@ -68,15 +75,16 @@ public class ShowGroupActivity extends AppCompatActivity {
         showGroupEventsFragment.setArguments(bundle);
 
         //Set Data
+        titleGroup = bundle.getString("title");
         setTitle(bundle.getString("title"));
-        setPicture(bundle.getString("picture"),getApplicationContext());
+        setPicture(bundle.getString("picture"), getApplicationContext());
         //Set uidGroup from Bundle
         uidGroup = bundle.getString("UID");
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
 
         isMyGroup(uidGroup);
 
-        if(!isOwn){
+        if (!isOwn) {
 
             //Through the whole section of "following" in Firebase
             //---------------------------------------------------------------------------------------------------------
@@ -88,15 +96,15 @@ public class ShowGroupActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Group group = new Group();
-                    for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         group = ds.getValue(Group.class);
-                        if(uidGroup.equals(group.getGroupUID())){
+                        if (uidGroup.equals(group.getGroupUID())) {
 
                             //Variable to handle the follow and unfollow
                             following = true;
                             floatingActionButton.setImageDrawable(ContextCompat
-                                    .getDrawable(getApplicationContext(),R.drawable.heart));
-                        }else{
+                                    .getDrawable(getApplicationContext(), R.drawable.heart));
+                        } else {
                             //---------------
                             //following = false;
                             Log.d("unfollow", "No sigue al grupo");
@@ -116,24 +124,24 @@ public class ShowGroupActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isOwn){
+                if (isOwn) {
                     //Call the Activity to create Events and send data
                     /*Bundle bundle = new Bundle();
                     bundle.putString("groupUID",uidGroup);*/
 
                     //Intent intent = new Intent(ShowGroupActivity.this,CreateEventActivity.class);
-                    Intent intent = new Intent(ShowGroupActivity.this,CreateGroupElementsActivity.class);
-                    intent.putExtra("groupUID",uidGroup);
+                    Intent intent = new Intent(ShowGroupActivity.this, CreateGroupElementsActivity.class);
+                    intent.putExtra("groupUID", uidGroup);
                     startActivity(intent);
 
                     Log.d("isOWn", "CREANDO LA ACTIVIDAD");
-                }else{
-                    if(following){
+                } else {
+                    if (following) {
 
                         floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext()
-                                ,R.drawable.heart_outline));
-                        Snackbar.make(view, "Dejar de seguir",Snackbar.LENGTH_LONG)
-                                .setAction("Action",null).show();
+                                , R.drawable.heart_outline));
+                        Snackbar.make(view, "Dejar de seguir", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
 
 //---------------------------------------------------------------------------------------------------------------------------
                         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -145,9 +153,9 @@ public class ShowGroupActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 Group groupDelete = new Group();
-                                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                     groupDelete = ds.getValue(Group.class);
-                                    if(uidGroup.equals(groupDelete.getGroupUID())){
+                                    if (uidGroup.equals(groupDelete.getGroupUID())) {
                                         ds.getRef().removeValue();
                                     }
                                 }
@@ -158,11 +166,11 @@ public class ShowGroupActivity extends AppCompatActivity {
 
                             }
                         });
-                        following =false;
+                        following = false;
 
-                    }else{
-                        Snackbar.make(view, "Siguiendo",Snackbar.LENGTH_LONG)
-                                .setAction("Action",null).show();
+                    } else {
+                        Snackbar.make(view, "Siguiendo", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                         floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
                                 R.drawable.heart));
                         setFollowing(bundle);
@@ -175,7 +183,7 @@ public class ShowGroupActivity extends AppCompatActivity {
 
     }
 
-    public void isMyGroup(String groupUiD){
+    public void isMyGroup(String groupUiD) {
 
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -187,30 +195,30 @@ public class ShowGroupActivity extends AppCompatActivity {
         mDatabaseReferenceGroup.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String uidUser= dataSnapshot.getValue(User.class).getUserUID();
-                if(uidUser.equals(firebaseUser.getUid())){
-                    Log.d("mani","el grupo es mio");
+                String uidUser = dataSnapshot.getValue(User.class).getUserUID();
+                if (uidUser.equals(firebaseUser.getUid())) {
+                    Log.d("mani", "el grupo es mio");
                     floatingActionButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
                             R.drawable.ic_add_black_24dp));
                     //The group is mine
                     isOwn = true;
-                }else {
-                    Log.d("mani","el grupo NO es mio");
+                } else {
+                    Log.d("mani", "el grupo NO es mio");
                     isOwn = false;
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("mani","No hay ningun datos");
+                Log.d("mani", "No hay ningun datos");
             }
         });
     }
-//esteeeeee es el que hay que corregir
-    public void setFollowing(Bundle groupData)
-    {
+
+    //esteeeeee es el que hay que corregir
+    public void setFollowing(Bundle groupData) {
         String idGroup = groupData.getString("UID");
-        Group group = new Group(idGroup,groupData.getString("title"),groupData.getString("picture"),groupData.getString("description"));
+        Group group = new Group(idGroup, groupData.getString("title"), groupData.getString("picture"), groupData.getString("description"));
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         //User user = new  User(firebaseUser.getUid());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -219,7 +227,7 @@ public class ShowGroupActivity extends AppCompatActivity {
         mDatabaseReference.child("users").child(firebaseUser.getUid()).child("following").child(uidGroup).setValue(group);
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
 
         textTitleGroup = (TextView) findViewById(R.id.text_Title_Group);
         textTitleGroup.setText(title);
@@ -233,7 +241,7 @@ public class ShowGroupActivity extends AppCompatActivity {
                 .into(imageGroup);
     }
 
-    public void createTabs(){
+    public void createTabs() {
         //Tabs
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -248,4 +256,109 @@ public class ShowGroupActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+
+        if (!isOwn) {
+            menu.setGroupVisible(R.menu.menu, false);
+            return false;
+        } else {
+            getMenuInflater().inflate(R.menu.menu, menu);
+            return true;
+        }
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+                showAlertDelete();
+                return true;
+
+            /*case R.id.action_block:
+                return true;*/
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+    }
+
+    public void deleteGroup(){
+
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        //DatabaseReference mDatabaseReferenceFollowing = mFirebaseDatabase.getReference().child("users").child(firebaseUser.getUid()).child("following");
+
+
+        // Delete from table groups
+        DatabaseReference mDatabaseReferenceGroup = mFirebaseDatabase.getReference().child("groups").child(uidGroup);
+        mDatabaseReferenceGroup.removeValue();
+
+
+
+        // Delete from Following
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReferenceGroup = mFirebaseDatabase.getReference().child("users");
+        mDatabaseReferenceGroup.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String uidUser = dataSnapshot.getValue(User.class).getUserUID();
+                DatabaseReference mDatabaseReferenceDelete = mFirebaseDatabase.getReference().child("users")
+                        .child(uidUser).child("following").child(uidGroup);
+                mDatabaseReferenceDelete.removeValue();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("mani", "No hay ningun datos");
+            }
+        });
+        // Delete from myGroups
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReferenceGroup = mFirebaseDatabase.getReference().child("users").child(firebaseUser.getUid())
+                .child("myGroups").child(uidGroup);
+        mDatabaseReferenceGroup.removeValue();
+        finish();
+        Log.d("borrar", "deleteGroup: borrado");
+        //Toast.makeText(getApplicationContext(), "Se eliminó", Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    public void showAlertDelete(){
+        new AlertDialog.Builder(ShowGroupActivity.this)
+                .setTitle("Eliminar grupo")
+                .setMessage(("¿Desea eliminar el grupo " + titleGroup +" ?"))
+                .setIcon(R.drawable.ic_delete_forever_black_24dp)
+                .setPositiveButton("Aceptar",
+                        new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int id) {
+
+
+                               Intent intent = new Intent(ShowGroupActivity.this, BottomNavActivity.class);
+                                startActivity(intent);
+                                dialog.cancel();
+                                deleteGroup();
+
+                            }
+                        })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                }).show();
+    }
 }

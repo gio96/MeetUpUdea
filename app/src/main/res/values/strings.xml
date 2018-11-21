@@ -31,5 +31,10 @@
     //Fragment meetup
     <string name="text_message_meetup">Aún no sigues a ningún grupo</string>
 
+    //Toolbar
+    <string name="DeleteGroup">Eliminar</string>
+    <string name="EditGroup">Editar</string>
+    <string name="SettingsGroup">Configuraciones</string>
+
 
 </resources>

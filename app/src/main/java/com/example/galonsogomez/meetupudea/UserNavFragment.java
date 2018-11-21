@@ -13,6 +13,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -54,7 +55,7 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
     private FirebaseDatabase mFirebaseDatabase;
 
     public UserNavFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -118,6 +119,10 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
                             public void onClick(View view) {
 
                                 //Show info of the group to edit
+                                Bundle bundleGroup = sendData(model);
+                                Intent intent = new Intent(getActivity(),ShowGroupActivity.class);
+                                intent.putExtras(bundleGroup);
+                                startActivity(intent);
                             }
                         });
 
@@ -126,6 +131,8 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
 
         recyclerVUsermyGroups.setAdapter(firebaseRecyclerAdapter);
     }
+
+
 
     public void signOut(){
         FirebaseAuth.getInstance().signOut();
@@ -145,6 +152,15 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
                 .fit()
                 .centerCrop()
                 .into(circleImageView);
+    }
+
+    public Bundle sendData(Group group){
+        Bundle bundle = new Bundle();
+        bundle.putString("UID",group.getGroupUID());
+        bundle.putString("title",group.getTitle());
+        bundle.putString("picture",group.getPicture());
+        bundle.putString("description",group.getDescription());
+        return bundle;
     }
 
     public void onClick(View v) {

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -97,6 +98,7 @@ public class HomeNavFragment extends Fragment {
         View mview;
         TextView groupTitle;
         ImageView groupPicture;
+        Button btnDeleteGroup;
         CardView cardViewEvent1 = (CardView) itemView.findViewById(R.id.cv_Group);
         public  GroupViewHolder(View itemView){
             super(itemView);
