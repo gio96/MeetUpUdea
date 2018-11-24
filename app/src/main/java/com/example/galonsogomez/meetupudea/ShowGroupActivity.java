@@ -293,6 +293,7 @@ public class ShowGroupActivity extends AppCompatActivity {
     }
 
     public void deleteGroup(){
+        deleteAttend();
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -325,7 +326,12 @@ public class ShowGroupActivity extends AppCompatActivity {
                 User user = new User();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     //user = ds.getValue(User.class);;
-                    Log.d("coso", ds.getKey());
+                    //Log.d("delete", ds.getKey());
+                    /*String getGroup = ds.child("following").getValue(Group.class).getGroupUID();
+
+                    if(getGroup==uidGroup){
+
+                    }*/
                     DatabaseReference mDatabaseReferenceDelete = mFirebaseDatabase.getReference().child("users")
                             .child(ds.getKey()).child("following").child(uidGroup);
                     mDatabaseReferenceDelete.removeValue();
@@ -334,11 +340,55 @@ public class ShowGroupActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("canceled", "No hay ningun datos");
+            }
+        });
+    }
+
+    public void deleteAttend(){
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mDatabaseReferenceAttend = mFirebaseDatabase.getReference().child("groups").child(uidGroup)
+        .child("events");
+        mDatabaseReferenceAttend.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    final String eventAttend = ds.getKey();
+
+                    final FirebaseDatabase mFirebaseDatabaseAttend = FirebaseDatabase.getInstance();
+                    DatabaseReference mDatabaseReferenceAttendUser = mFirebaseDatabaseAttend
+                            .getReference().child("users");
+
+                    mDatabaseReferenceAttendUser
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            for (DataSnapshot dsu : dataSnapshot.getChildren()) {
+                                String userId = dsu.getKey();
+
+                                DatabaseReference mDatabaseReferenceDelete = mFirebaseDatabaseAttend
+                                        .getReference().child("users")
+                                        .child(userId).child("attend").child(eventAttend);
+
+                                mDatabaseReferenceDelete.removeValue();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.d("mani", "No hay ningun datos");
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d("mani", "No hay ningun datos");
             }
         });
-
-
     }
 
     public void showAlertDelete(){
