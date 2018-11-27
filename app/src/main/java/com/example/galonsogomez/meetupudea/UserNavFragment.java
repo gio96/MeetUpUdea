@@ -112,7 +112,7 @@ public class UserNavFragment extends Fragment implements View.OnClickListener{
                         //groupViewHolder.setIdGroup(model.getGroupUID());
                         Log.d("model", model.getTitle());
                         groupViewHolder.setTitle(model.getTitle());
-                        groupViewHolder.setIcon();
+                        //groupViewHolder.setIcon();
                         groupViewHolder.setPicture(model.getPicture(),getActivity().getApplicationContext());
                         groupViewHolder.cardViewEvent1.setOnClickListener(new View.OnClickListener() {
                             @Override
