@@ -12,6 +12,7 @@ public class Group {
     private String title;
     private String picture;
     private String description;
+    private boolean notification;
 
     public Group() {
 
@@ -74,5 +75,13 @@ public class Group {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public boolean isNotification() {
+        return notification;
+    }
+
+    public void setNotification(boolean notification) {
+        this.notification = notification;
     }
 }

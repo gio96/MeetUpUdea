@@ -41,6 +41,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 public class ShowGroupActivity extends AppCompatActivity {
 
     // Views
@@ -52,6 +54,7 @@ public class ShowGroupActivity extends AppCompatActivity {
 
     private String uidGroup;
     private String titleGroup;
+    private boolean notification = false;
 
     boolean following = false;
     boolean isOwn = false;
@@ -75,13 +78,14 @@ public class ShowGroupActivity extends AppCompatActivity {
         showGroupEventsFragment.setArguments(bundle);
 
         //Set Data
+        notification = bundle.getBoolean("notification");
+        Log.d("intefr", String.valueOf(notification));
         titleGroup = bundle.getString("title");
         setTitle(bundle.getString("title"));
         setPicture(bundle.getString("picture"), getApplicationContext());
         //Set uidGroup from Bundle
         uidGroup = bundle.getString("UID");
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-
         isMyGroup(uidGroup);
 
         if (!isOwn) {
@@ -90,7 +94,7 @@ public class ShowGroupActivity extends AppCompatActivity {
             //---------------------------------------------------------------------------------------------------------
             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
-            DatabaseReference mDatabaseReferenceFollowing = mFirebaseDatabase.getReference().child("users")
+            final DatabaseReference mDatabaseReferenceFollowing = mFirebaseDatabase.getReference().child("users")
                     .child(firebaseUser.getUid()).child("following");
             mDatabaseReferenceFollowing.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -104,6 +108,17 @@ public class ShowGroupActivity extends AppCompatActivity {
                             following = true;
                             floatingActionButton.setImageDrawable(ContextCompat
                                     .getDrawable(getApplicationContext(), R.drawable.heart));
+
+                            //Notification module
+                            if(notification){
+                                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                FirebaseDatabase mFirebaseDatabaseNotification = FirebaseDatabase.getInstance();
+                                DatabaseReference mDatabaseRefNotification = mFirebaseDatabaseNotification.getReference();
+                                mDatabaseRefNotification.child("users").child(firebaseUser.getUid()).child("following")
+                                        .child(uidGroup).child("notification").setValue(false);
+                            }
+
+
                         } else {
                             //---------------
                             //following = false;

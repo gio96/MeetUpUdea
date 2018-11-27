@@ -87,14 +87,17 @@ public class MeetUpNavFragment extends Fragment {
 
         FirebaseRecyclerAdapter<Group,MeetUpNavFragment.GroupViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<Group,MeetUpNavFragment.GroupViewHolder>
-                        (Group.class,R.layout.item_group,MeetUpNavFragment.GroupViewHolder.class,mreference) {
+                        (Group.class,R.layout.item_group_meetup,MeetUpNavFragment.GroupViewHolder.class,mreference) {
 
                     @Override
                     public  void populateViewHolder(MeetUpNavFragment.GroupViewHolder groupViewHolder,
                                                     final Group model , int position){
 
                         // To assign the info from Database to cardView
-                        //groupViewHolder.setIdGroup(model.getGroupUID());
+                        if(model.isNotification()){
+                            groupViewHolder.setNotification();
+                        }
+
                         groupViewHolder.setTitle(model.getTitle());
 
                         groupViewHolder.setPicture(model.getPicture(),getActivity().getApplicationContext());
@@ -120,7 +123,8 @@ public class MeetUpNavFragment extends Fragment {
         View mview;
         TextView groupTitle;
         ImageView groupPicture;
-        CardView cardViewEvent1 = (CardView) itemView.findViewById(R.id.cv_Group);
+        ImageView groupNotification;
+        CardView cardViewEvent1 = (CardView) itemView.findViewById(R.id.cv_Meetup);
         public  GroupViewHolder(View itemView){
             super(itemView);
             mview = itemView;
@@ -139,6 +143,11 @@ public class MeetUpNavFragment extends Fragment {
                     .centerCrop()
                     .into(groupPicture);
         }
+
+        public  void setNotification(){
+            groupNotification = (ImageView) itemView.findViewById(R.id.img_Notification);
+            groupNotification.setVisibility(View.VISIBLE);
+        }
     }
 
     public Bundle sendData(Group group){
@@ -147,6 +156,7 @@ public class MeetUpNavFragment extends Fragment {
         bundle.putString("title",group.getTitle());
         bundle.putString("picture",group.getPicture());
         bundle.putString("description",group.getDescription());
+        bundle.putBoolean("notification", group.isNotification());
         return bundle;
     }
 
