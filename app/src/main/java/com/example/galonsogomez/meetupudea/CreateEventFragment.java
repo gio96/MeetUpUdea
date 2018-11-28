@@ -24,14 +24,18 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
@@ -247,9 +251,10 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                         // Create object Event
 
                         setEvent(uidGroup,linkPicture);
-                        // Add child
-                        /*mDatabaseReference.child(group.getGroupUID()).setValue(group);*/
+
+                        setNotificationFollowing(uidGroup);
                         Toast.makeText(getActivity().getApplicationContext(),"Evento creado",Toast.LENGTH_SHORT).show();
+
 
                         cleanFields();
                         Log.d("createEvent", linkPicture);
@@ -292,6 +297,38 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference();
         mDatabaseReference.child("groups").child(uidGroup).child("events").child(event.getEventUID()).setValue(event);
+    }
+
+    public void setNotificationFollowing(final String uidGroup){
+        final String idGroup = uidGroup;
+
+        final FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mDatabaseRefUser = mFirebaseDatabase.getReference().child("users");
+
+        mDatabaseRefUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot dsu : dataSnapshot.getChildren()) {
+                            String userId = dsu.getKey();
+
+                            HashMap<String,Object> noti = new HashMap<>();
+                            noti.put("notification", true);
+
+//Problem Where Not  is found idGroup setValue create a new register with idgroup notification each user
+                            FirebaseDatabase mFirebaseDatabaseNotification = FirebaseDatabase.getInstance();
+                            DatabaseReference mDatabaseRefNotification = mFirebaseDatabaseNotification.getReference();
+                            mDatabaseRefNotification.child("users").child(userId).child("following").child(idGroup).child("notification").setValue(true);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.d("mani", "No hay ningun datos");
+                    }
+                });
+
+
     }
 
 }

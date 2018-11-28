@@ -233,7 +233,7 @@ public class ShowGroupActivity extends AppCompatActivity {
     //esteeeeee es el que hay que corregir
     public void setFollowing(Bundle groupData) {
         String idGroup = groupData.getString("UID");
-        Group group = new Group(idGroup, groupData.getString("title"), groupData.getString("picture"), groupData.getString("description"));
+        Group group = new Group(idGroup, groupData.getString("title"), groupData.getString("picture"), groupData.getString("description"),false);
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         //User user = new  User(firebaseUser.getUid());
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -328,7 +328,6 @@ public class ShowGroupActivity extends AppCompatActivity {
         mDatabaseReferenceGroup.removeValue();
         //finish();
         Log.d("borrar", "deleteGroup: borrado");
-        //Toast.makeText(getApplicationContext(), "Se eliminó", Toast.LENGTH_SHORT).show();
 
         // Delete from Following
 
