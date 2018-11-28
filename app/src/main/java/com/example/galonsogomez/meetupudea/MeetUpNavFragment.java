@@ -91,22 +91,22 @@ public class MeetUpNavFragment extends Fragment {
 
                     @Override
                     public  void populateViewHolder(MeetUpNavFragment.GroupViewHolder groupViewHolder,
-                                                    final Group model , int position){
-
+                                                    final Group model , int position) {
                         // To assign the info from Database to cardView
-                        if(model.isNotification()){
+                        if (model.isNotification()) {
                             groupViewHolder.setNotification();
                         }
 
+
                         groupViewHolder.setTitle(model.getTitle());
 
-                        groupViewHolder.setPicture(model.getPicture(),getActivity().getApplicationContext());
+                        groupViewHolder.setPicture(model.getPicture(), getActivity().getApplicationContext());
                         groupViewHolder.cardViewEvent1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
 
                                 Bundle bundleGroup = sendData(model);
-                                Intent intent = new Intent(getActivity(),ShowGroupActivity.class);
+                                Intent intent = new Intent(getActivity(), ShowGroupActivity.class);
                                 intent.putExtras(bundleGroup);
                                 startActivity(intent);
                             }
@@ -128,6 +128,7 @@ public class MeetUpNavFragment extends Fragment {
         public  GroupViewHolder(View itemView){
             super(itemView);
             mview = itemView;
+
         }
 
         public void setTitle(String title){

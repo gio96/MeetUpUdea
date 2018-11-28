@@ -252,11 +252,12 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
                         setEvent(uidGroup,linkPicture);
 
-                        setNotificationFollowing(uidGroup);
+
                         Toast.makeText(getActivity().getApplicationContext(),"Evento creado",Toast.LENGTH_SHORT).show();
 
 
                         cleanFields();
+                        setNotificationFollowing(uidGroup);
                         Log.d("createEvent", linkPicture);
                     }
                 }
@@ -312,13 +313,30 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                         for (DataSnapshot dsu : dataSnapshot.getChildren()) {
                             String userId = dsu.getKey();
 
-                            HashMap<String,Object> noti = new HashMap<>();
-                            noti.put("notification", true);
-
 //Problem Where Not  is found idGroup setValue create a new register with idgroup notification each user
                             FirebaseDatabase mFirebaseDatabaseNotification = FirebaseDatabase.getInstance();
-                            DatabaseReference mDatabaseRefNotification = mFirebaseDatabaseNotification.getReference();
-                            mDatabaseRefNotification.child("users").child(userId).child("following").child(idGroup).child("notification").setValue(true);
+                            DatabaseReference mDatabaseRefNotification = mFirebaseDatabaseNotification.getReference().child("users").child(userId).child("following");
+                            //mDatabaseRefNotification.child("users").child(userId).child("following");
+                            mDatabaseRefNotification.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    //for(DataSnapshot ds : dataSnapshot.getChildren()){
+
+                                        if(dataSnapshot.hasChild(idGroup)){
+                                            dataSnapshot.getRef().child(idGroup).child("notification").setValue(true);
+
+                                            Log.d("sefue", "existo");
+                                        }else {
+                                            Log.d("sefue", "No esta ese grupo");
+                                        }
+                                    //}
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                         }
                     }
 
